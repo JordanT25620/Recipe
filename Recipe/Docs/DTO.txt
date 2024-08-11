@@ -1,0 +1,61 @@
+Add Dto to the end of each of their names.
+
+Recipe:
+- id: Guid
+- ingredients: List<Ingredient> (require at least 1 ingredient before being able to create/save the recipe, so this is not null)
+- createdByUser: User
+- difficulty?: Difficulty
+- just dynamically build the qr code with the id.
+- timeAmount?: TimeRequiredDto
+- picture?: no idea how this will work or the datatype atm
+- recipeTags: List<RecipeTag> (wont be null, just will be an empty list if no tags)
+- createdOn: Date
+- updatedOn: Dat
+
+TimeAmountDto (neither field is nullable because the actual timeRequired property of the Recipe is nullable instead):
+- numericAmount: int
+- units: enum TimeAmountUnits
+
+IngredientAmountDto (neither field is nullable because the actual timeRequired property of the Recipe is nullable instead):
+- numericAmount: int
+- units: enum IngredientAmountUnits
+
+User:
+- id: Guid
+- username: string
+- NO PASSWORD NEEDED... JUST KEEP HASHED IN THE DB
+
+Ingredient:
+- id: Guid
+- name: string
+- ingredientAmount?: IngredientAmountDto
+- description: string (LONG string in DB... determine the number of characters allowed on UI)
+- orderIndex: int
+- muscleGroup: MuscleGroup
+
+RecipeTag:
+- id: Guid
+- name: string
+(later add colors per type of tag?)
+
+Difficulty:
+- id: Guid
+- name: DifficultyName (the enum)
+- colorName?: string
+- colorHexValue: string (or some C# type for the color hex value)
+
+enum DifficultyName: maybe do a little colored dot next to it for each difficulty.
+Difficulty.Simple - green
+Difficulty.Moderate - yellow
+Difficulty.Challenging - red
+
+enum TimeAmountUnits: 
+TimeAmountUnits.sec
+TimeAmountUnits.min
+TimeAmountUnits.hour
+
+enum IngredientAmountUnits: 
+IngredientAmountUnits.tbspn
+IngredientAmountUnits.tspn
+IngredientAmountUnits.grams
+... list out more units
