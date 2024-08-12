@@ -1,0 +1,16 @@
+Recipe Sharing API w/ QR codes
+- The app is free and do not need an account UNLESS you are creating a recipe to share.
+- It is a WEB APP, but especially designed to fit a phone screen.
+
+Ideas:
+- 
+
+Endpoints (flesh this out more):
+
+api/v1/recipe
+api/v1/ingredient
+api/v1/user
+
+dotnet ef migrations add migrationName
+
+dotnet ef database update

@@ -1,0 +1,45 @@
+**THINK ABOUT REVERSING ORDER OF FOREIGN KEYS **
+** Write down all the properties of exercises and redesign exercise related stuff **
+
+User:
+- id (PK)
+- username: string NOT NULL + UNIQUE
+- password: string (hashed) NOT NULL
+- createdOn: Date NOT NULL Default - UTCNOW()
+- updatedOn: Date NOT NULL Default - UTCNOW()
+
+Recipe:
+- id (PK)
+- createdByUserId: int (references User.id) CASCADE DELETE
+- difficultyId: int (references Difficulty.id) NULL
+- timeRequired: int NULL
+- timeRequiredUnits: string NOT NULL
+- picture/icon? : blob? NULL (for now)
+- createdOn: Date NOT NULL Default - UTCNOW()
+- updatedOn: Date NOT NULL Default - UTCNOW()
+
+Ingredient:
+- id (PK)
+- recipeId (references Recipe.id) NOT NULL
+- name: string NOT NULL
+- amount: int NULL (very suggested to enter this though... unless for spices or something)
+- amountUnits: string NULL (CONSTRAINT IF amount != null, this cant be null either)
+- description: string (LONG string in DB... determine the number of characters allowed on UI)
+- orderIndex: int NOT NULL
+- createdOn: Date NOT NULL Default - UTCNOW()
+- updatedOn: Date NOT NULL Default - UTCNOW()
+
+RecipeTag: (1 -> many .... recipe -> recipetag)
+- id: (PK)
+- recipeId: int (references Recipe.id) NOT NULL CASCADE DELETE
+- name: string NOT NULL ("breakfast", "lunch", "dinner", "dessert", "vegan", "keto", "healthy", "snack" ... list more later.)
+(maybe make the different types of tags into a standard enum here in the DB)...nah dont, we can just render out any random strings here as "Unknown".
+Still have the enum in the C# and React though, just make "Unknown" as the default/backup. 
+
+Difficulty: (1 of these per Recipe) --- Users DONT CREATE THESE, they are preset in the DB.
+- id: Guid (PK)
+- name: string NOT NULL + UNIQUE
+- colorName: string Default NULL
+- colorHexValue: string NULL
+- createdOn: Date Default - UTCNOW()
+- updatedOn: Date Default - UTCNOW()
