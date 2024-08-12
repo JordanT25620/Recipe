@@ -1,9 +1,8 @@
 using ErrorOr;
-using Recipe.Data;
-using Recipe.Models;
 using Recipe.Models.Dto;
+using Recipe.Models.Schema;
 using Recipe.Repositories.Users;
-using Recipe.ServiceErrors;
+using Recipe.Requests.HttpModels.Users;
 
 namespace Recipe.Services.Users;
 
@@ -16,9 +15,16 @@ public class UserService : IUserService {
         _userRepository = userRepository;
     }
 
-    public ErrorOr<Created> CreateUser(UserDto user)
+    public ErrorOr<Created> CreateUser(CreateOrUpsertUserRequest userRequest)
     {
-        // Todo: Store in DB.
+        User user = new User(
+            new Guid(),
+            userRequest.Username,
+            userRequest.Password,
+            DateTime.UtcNow,
+            DateTime.UtcNow
+        );
+        _userRepository.InsertUser(user);
         return Result.Created;
     }
 
@@ -34,7 +40,7 @@ public class UserService : IUserService {
         throw new NotImplementedException();
     }
 
-    public ErrorOr<UpsertedUser> UpsertUser(Guid id, UserDto user)
+    public ErrorOr<UpsertedUser> UpsertUser(Guid id, CreateOrUpsertUserRequest userRequest)
     {
         var isNewlyCreated = false; //check db to see if the user already exists - if not, it will be created.
         //Insert (or update) the user here.

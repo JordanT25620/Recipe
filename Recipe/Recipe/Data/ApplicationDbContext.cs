@@ -1,5 +1,5 @@
-using Recipe.Models;
 using Microsoft.EntityFrameworkCore;
+using Recipe.Models.Schema;
 
 namespace Recipe.Data;
 

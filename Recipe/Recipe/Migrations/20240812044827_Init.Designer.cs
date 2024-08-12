@@ -12,8 +12,8 @@ using Recipe.Data;
 namespace Recipe.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240811060835_init")]
-    partial class init
+    [Migration("20240812044827_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Recipe.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Recipe.Models.User", b =>
+            modelBuilder.Entity("Recipe.Models.Schema.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +44,7 @@ namespace Recipe.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("UpdatedAt");
+                        .HasColumnName("updatedAt");
 
                     b.Property<string>("Username")
                         .IsRequired()

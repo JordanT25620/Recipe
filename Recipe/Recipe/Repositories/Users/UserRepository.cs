@@ -1,6 +1,6 @@
 using Recipe.Data;
-using Recipe.Models;
 using Recipe.Models.Dto;
+using Recipe.Models.Schema;
 
 namespace Recipe.Repositories.Users;
 
@@ -29,9 +29,10 @@ public class UserRepository : IUserRepository
         throw new NotImplementedException();
     }
 
-    public void InsertUser(UserDto user)
+    public void InsertUser(User user)
     {
-        throw new NotImplementedException();
+        _context.Users.Add(user);
+        _context.SaveChanges();
     }
 
     public UserDto toDto(User user)
@@ -44,7 +45,7 @@ public class UserRepository : IUserRepository
         return new User(dto.Id, dto.Username, password, DateTime.UtcNow, DateTime.UtcNow);
     }
 
-    public void UpsertUser(Guid id, UserDto user)
+    public void UpsertUser(Guid id, UserDto userDto)
     {
         throw new NotImplementedException();
     }

@@ -2,6 +2,7 @@ using ErrorOr;
 using Recipe.Models.Dto;
 using Recipe.Services.Users;
 using Microsoft.AspNetCore.Mvc;
+using Recipe.Requests.HttpModels.Users;
 
 namespace Recipe.Controllers;
 
@@ -14,18 +15,18 @@ public class UsersController : ApiController {
     }
 
     [HttpPost("")]
-    public IActionResult CreateUser([FromBody] UserDto userDto) {
+    public IActionResult CreateUser([FromBody] CreateOrUpsertUserRequest user) {
 
-        ErrorOr<Created> createUserResult = _userService.CreateUser(userDto);
+        ErrorOr<Created> createUserResult = _userService.CreateUser(user);
 
         return createUserResult.Match(
-            created => CreatedAtGetUser(userDto),
+            created => CreatedAtGetUser(user),
             errors => Problem(errors)
         );
     } 
 
     [HttpGet("{id:guid}")]
-    public IActionResult GetUser(Guid id) {
+    public IActionResult GetUser([FromRoute] Guid id) {
 
         ErrorOr<UserDto> getUserResult = _userService.GetUser(id);
 
@@ -36,18 +37,18 @@ public class UsersController : ApiController {
     }
 
     [HttpPut("{id:guid}")]
-    public IActionResult UpsertUser([FromRoute] Guid id, [FromBody] UserDto userDto) {
+    public IActionResult UpsertUser([FromRoute] Guid id, [FromBody] CreateOrUpsertUserRequest user) {
 
-        ErrorOr<UpsertedUser> upsertUserResult = _userService.UpsertUser(id, userDto);
+        ErrorOr<UpsertedUser> upsertUserResult = _userService.UpsertUser(id, user);
 
         return upsertUserResult.Match(
-            upsertedUser => upsertedUser.isNewlyCreated ? CreatedAtGetUser(userDto) : NoContent(), 
+            upsertedUser => upsertedUser.isNewlyCreated ? CreatedAtGetUser(user) : NoContent(), 
             errors => Problem(errors)
         );
     }
 
     [HttpDelete("{id:guid}")]
-    public IActionResult DeleteUser(Guid id) {
+    public IActionResult DeleteUser([FromRoute] Guid id) {
 
         ErrorOr<Deleted> deleteUserResult = _userService.DeleteUser(id);
 
@@ -57,11 +58,11 @@ public class UsersController : ApiController {
         );
     }
 
-    private CreatedAtActionResult CreatedAtGetUser(UserDto userDto){
+    private CreatedAtActionResult CreatedAtGetUser(CreateOrUpsertUserRequest user){
         return CreatedAtAction(
             actionName: nameof(CreateUser),
-            routeValues: new { id = userDto.Id },
-            value: userDto
+            routeValues: new { username = user.Username },
+            value: user
         );
     }
 }

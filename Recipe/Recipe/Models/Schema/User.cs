@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Recipe.Models;
+namespace Recipe.Models.Schema;
 
 [Table("users", Schema = "data")]
 public class User {
