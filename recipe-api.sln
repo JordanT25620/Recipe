@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipe-api", "recipe-api\recipe-api.csproj", "{49A5CB12-8D8C-4A31-947B-92EC20FA4ABB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2D40280-7E41-410C-A33B-4F7F2584AFFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D40280-7E41-410C-A33B-4F7F2584AFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D40280-7E41-410C-A33B-4F7F2584AFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D40280-7E41-410C-A33B-4F7F2584AFFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49A5CB12-8D8C-4A31-947B-92EC20FA4ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A5CB12-8D8C-4A31-947B-92EC20FA4ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A5CB12-8D8C-4A31-947B-92EC20FA4ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A5CB12-8D8C-4A31-947B-92EC20FA4ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
