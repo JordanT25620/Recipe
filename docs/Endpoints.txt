@@ -1,0 +1,5 @@
+Endpoints (flesh this out more):
+
+api/v1/recipe
+api/v1/ingredient
+api/v1/user
