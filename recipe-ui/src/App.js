@@ -1,9 +1,12 @@
-import './App.css';
+// Ensures components.js is included
+import { ButtonUsage, Floater, Email, Password } from "./components.js";
+import Login from "./pages/login.js";
 
 function App() {
   return (
     <div className="App">
-      <p>hello</p>
+      <Login />
+
     </div>
   );
 }
