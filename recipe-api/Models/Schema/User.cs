@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Recipe.Models.Dto;
 
 namespace Recipe.Models.Schema;
 
@@ -43,6 +44,11 @@ public class User {
         Password = password;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
+    }
+
+    public UserDto toDto()
+    {
+        return new UserDto(Id, Username);
     }
 
 }

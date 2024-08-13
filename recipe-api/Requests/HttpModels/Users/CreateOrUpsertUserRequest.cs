@@ -1,6 +1,6 @@
 namespace Recipe.Requests.HttpModels.Users;
 
-public record CreateOrUpsertUserRequest(
+public record CreateOrUpdateUserRequest(
     string Username,
     string Password
 );

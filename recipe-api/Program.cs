@@ -1,5 +1,4 @@
 using Recipe.Data;
-using Recipe.Repositories.Users;
 using Recipe.Services.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +10,6 @@ builder.Services.AddControllers();
 
 
 builder.Services.AddScoped<IUserService, UserService>(); //AddSingleton, AddScoped, AddTransient
-builder.Services.AddScoped<IUserRepository, UserRepository>(); //AddSingleton, AddScoped, AddTransient
 
 
 builder.Services.AddEndpointsApiExplorer();

@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>recipe-api</AssemblyName>
+    <RootNamespace>recipe_api</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

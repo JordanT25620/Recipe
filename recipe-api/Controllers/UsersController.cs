@@ -15,12 +15,12 @@ public class UsersController : ApiController {
     }
 
     [HttpPost("")]
-    public IActionResult CreateUser([FromBody] CreateOrUpsertUserRequest user) {
+    public IActionResult CreateUser([FromBody] CreateOrUpdateUserRequest userRequest) {
 
-        ErrorOr<Created> createUserResult = _userService.CreateUser(user);
+        ErrorOr<Created> createUserResult = _userService.CreateUser(userRequest);
 
         return createUserResult.Match(
-            created => CreatedAtGetUser(user),
+            created => CreatedAtGetUser(userRequest),
             errors => Problem(errors)
         );
     } 
@@ -36,13 +36,24 @@ public class UsersController : ApiController {
         );
     }
 
+    // [HttpPut("{id:guid}")]
+    // public IActionResult UpsertUser([FromRoute] Guid id, [FromBody] CreateOrUpdateUserRequest userRequest) {
+
+    //     ErrorOr<UpsertedUser> upsertUserResult = _userService.UpsertUser(id, userRequest);
+
+    //     return upsertUserResult.Match(
+    //         upsertedUser => upsertedUser.isNewlyCreated ? CreatedAtGetUser(userRequest) : NoContent(), 
+    //         errors => Problem(errors)
+    //     );
+    // }
+
     [HttpPut("{id:guid}")]
-    public IActionResult UpsertUser([FromRoute] Guid id, [FromBody] CreateOrUpsertUserRequest user) {
+    public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] CreateOrUpdateUserRequest userRequest) {
 
-        ErrorOr<UpsertedUser> upsertUserResult = _userService.UpsertUser(id, user);
+        ErrorOr<Updated> updateUserResult = _userService.UpdateUser(id, userRequest);
 
-        return upsertUserResult.Match(
-            upsertedUser => upsertedUser.isNewlyCreated ? CreatedAtGetUser(user) : NoContent(), 
+        return updateUserResult.Match(
+            updated =>  NoContent(),
             errors => Problem(errors)
         );
     }
@@ -58,11 +69,11 @@ public class UsersController : ApiController {
         );
     }
 
-    private CreatedAtActionResult CreatedAtGetUser(CreateOrUpsertUserRequest user){
+    private CreatedAtActionResult CreatedAtGetUser(CreateOrUpdateUserRequest userRequest){
         return CreatedAtAction(
             actionName: nameof(CreateUser),
-            routeValues: new { username = user.Username },
-            value: user
+            routeValues: new { username = userRequest.Username },
+            value: userRequest.Username
         );
     }
 }
