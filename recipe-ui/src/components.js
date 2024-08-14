@@ -4,36 +4,22 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import React from "react";
-import Button from '@mui/material/Button';
-import Fab from '@mui/material/Button'
+import { Button, Fab, TextField, IconButton, Input, InputLabel, InputAdornment, FormControl, Tooltip } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import AddIcon from '@mui/icons-material/Add';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 
-
-
-
-// Create the button
-function ButtonUsage() {
+// text prop inserts itself into the button
+const ButtonUsage = ({text}) => {
     return (
       <div>
-        <Button variant="contained">Log in</Button>
+        <Button type="submit" variant="contained" color="primary"> {text} </Button>
       </div>
     );
 }
 
 // Floating action button
-function Floater(){
+const Floater = () => {
   return (
     <div>
       <Fab color="primary" aria-label="add">
@@ -43,7 +29,8 @@ function Floater(){
   );
 }
 
-function Username() {
+// Username entry component
+const Username = () => {
   return (
     <div>
       <TextField
@@ -60,8 +47,8 @@ function Username() {
 }
 
 
-
-export default function Password() {
+// Password entry component
+const Password = ({text}) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -80,7 +67,7 @@ export default function Password() {
         type="password"
         id="password"
         autoComplete="current-password"
-      >Password
+      >{text}
       </InputLabel>
       <Input
         id="standard-adornment-password"
@@ -101,5 +88,30 @@ export default function Password() {
   )
 }
 
+const HoverTip = ({ text }) => {
+  return (
+    <div>
+      <Tooltip title={text} disableInteractive arrow>
+        <Button size="small" variant="outlined"
+          style={{
+            borderRadius: '50%',
+            width: '24px',
+            height: '24px',
+            minWidth: '24px',
+          }}>
+          <QuestionMarkIcon
+            style={{
+              width: '16px',
+              height: '16px',
+            }}
+          />
+        </Button>
+      </Tooltip>
+    </div>
+  )
+}
+
+
+
 // make sure the other files can read these functions (cannot be defaulted)
-export { Floater, ButtonUsage, Username, Password };
+export { Floater, ButtonUsage, Username, Password, HoverTip };

@@ -25,19 +25,12 @@ class Login extends React.Component {
 
                         {/* Password Field */}
                         <Grid item xs={12}>
-                            <Password />
+                            <Password text="Password"/>
                         </Grid>
 
                         {/* Submit Button */}
                         <Grid item xs={12}>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                            >
-                                Login
-                            </Button>
+                            <ButtonUsage text="Login"/>
                         </Grid>
 
                         {/* Account Creation Link */}
