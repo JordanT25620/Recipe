@@ -13,4 +13,8 @@ public class ApplicationDbContext : DbContext {
     public DbSet<User> Users { get; set; } = null!;
     #endregion
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder){
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+    }
+
 }

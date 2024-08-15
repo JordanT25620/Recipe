@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Recipe.Migrations
+namespace recipe_api.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,8 +20,8 @@ namespace Recipe.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    username = table.Column<string>(type: "text", nullable: false),
-                    password = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    username = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    password = table.Column<string>(type: "text", nullable: false),
                     createdAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -29,6 +29,13 @@ namespace Recipe.Migrations
                 {
                     table.PrimaryKey("PK_users", x => x.id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_users_username",
+                schema: "data",
+                table: "users",
+                column: "username",
+                unique: true);
         }
 
         /// <inheritdoc />

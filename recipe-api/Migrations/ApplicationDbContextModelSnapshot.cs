@@ -8,7 +8,7 @@ using Recipe.Data;
 
 #nullable disable
 
-namespace Recipe.Migrations
+namespace recipe_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -35,8 +35,7 @@ namespace Recipe.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
+                        .HasColumnType("text")
                         .HasColumnName("password");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -45,10 +44,14 @@ namespace Recipe.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
                         .HasColumnName("username");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("users", "data");
                 });

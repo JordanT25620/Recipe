@@ -1,4 +1,5 @@
 using ErrorOr;
+using Microsoft.AspNetCore.Identity;
 using Recipe.Data;
 using Recipe.Models.Dto;
 using Recipe.Models.Schema;
@@ -10,10 +11,11 @@ namespace Recipe.Services.Users;
 public class UserService : IUserService {
 
     private readonly ApplicationDbContext _dbContext;
-    private const int REQUIRED_PASSWORD_LENGTH = 7;
+    private readonly PasswordHasher<User> _passwordHasher;
 
     public UserService(ApplicationDbContext context){
         _dbContext = context;
+        _passwordHasher = new PasswordHasher<User>();
     }
 
     public ErrorOr<Created> CreateUser(CreateOrUpdateUserRequest userRequest)
@@ -22,8 +24,16 @@ public class UserService : IUserService {
             return Errors.User.UsernameExists;
         }
 
-        if (userRequest.Password.Length < REQUIRED_PASSWORD_LENGTH){
-            return Errors.User.PasswordLengthRequirement;
+        if (userRequest.Username.Length < User.MIN_USERNAME_LENGTH){
+            return Errors.User.UsernameTooShort;
+        } else if (userRequest.Username.Length > User.MAX_USERNAME_LENGTH){
+            return Errors.User.UsernameTooLong;
+        }
+
+        if (userRequest.Password.Length < User.MIN_USERNAME_LENGTH){
+            return Errors.User.PasswordTooShort;
+        } else if (userRequest.Password.Length > User.MAX_PASSWORD_LENGTH){
+            return Errors.User.PasswordTooLong;
         }
 
         User user = new User(
@@ -33,6 +43,8 @@ public class UserService : IUserService {
             DateTime.UtcNow,
             DateTime.UtcNow
         );
+        user.Password = _passwordHasher.HashPassword(user, userRequest.Password);
+
         _dbContext.Users.Add(user);
         _dbContext.SaveChanges();
 
@@ -60,15 +72,24 @@ public class UserService : IUserService {
             if (doesUserNameExist(userRequest.Username)){
                 return Errors.User.UsernameExists;
             }
+            if (userRequest.Username.Length < User.MIN_USERNAME_LENGTH){
+                return Errors.User.UsernameTooShort;
+            } else if (userRequest.Username.Length > User.MAX_USERNAME_LENGTH){
+                return Errors.User.UsernameTooLong;
+            }
         }
 
-        if (userRequest.Password.Length < REQUIRED_PASSWORD_LENGTH){
-            return Errors.User.PasswordLengthRequirement;
+        if (user.Password != userRequest.Password){
+            if (userRequest.Password.Length < User.MIN_PASSWORD_LENGTH){
+                return Errors.User.PasswordTooShort;
+            } else if (userRequest.Password.Length > User.MAX_PASSWORD_LENGTH){
+                return Errors.User.PasswordTooLong;
+            }
         }
 
         user.Username = userRequest.Username;
-        user.Password = userRequest.Password;
         user.UpdatedAt = DateTime.UtcNow;
+        user.Password = _passwordHasher.HashPassword(user, userRequest.Password);
 
         _dbContext.Users.Update(user);
         _dbContext.SaveChanges();

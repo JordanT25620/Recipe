@@ -4,4 +4,13 @@ Recipe Sharing API w/ QR codes
 
 
 Considerations for ui-api sync:
-- Registration forms need to set minimum password length to 7 before successful registration.
+
+Requirements:
+- Registration forms:
+    - Password length:
+        - Min: 7
+        - Max: 40
+    - Username:
+        - Must be unique (thats a server thing)
+        - Min: 2
+        - Max: 30

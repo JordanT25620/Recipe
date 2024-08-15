@@ -9,6 +9,16 @@ public class User {
 
 #nullable disable
 
+    //Min requirements will be checked on UI and Service layer.
+    public static readonly int MIN_USERNAME_LENGTH = 2;
+    public static readonly int MIN_PASSWORD_LENGTH = 7;
+
+    //Max requirements will be used in UserConfigurations.cs for the actual Postgres column limits.
+    //Will also be checked on the UI and Service layer.
+    public static readonly int MAX_PASSWORD_LENGTH = 40; //This requirement is for the password itself, not the hash.
+    public static readonly int MAX_USERNAME_LENGTH = 30;
+
+
     [Key]
     [Column("id")]
     public Guid Id { get; set; }
@@ -18,7 +28,6 @@ public class User {
     public string Username { get; set; }
 
     [Column("password")]
-    [StringLength(30)]
     [Required]
     public string Password { get; set; }
 

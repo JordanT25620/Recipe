@@ -9,11 +9,11 @@ using Recipe.Data;
 
 #nullable disable
 
-namespace Recipe.Migrations
+namespace recipe_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240812044827_Init")]
-    partial class Init
+    [Migration("20240813081246_InitMigration")]
+    partial class InitMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,8 +38,7 @@ namespace Recipe.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
+                        .HasColumnType("text")
                         .HasColumnName("password");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -48,10 +47,14 @@ namespace Recipe.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
                         .HasColumnName("username");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("users", "data");
                 });
