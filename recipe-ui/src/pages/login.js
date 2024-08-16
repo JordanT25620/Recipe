@@ -1,59 +1,62 @@
 import React from "react";
-import { Grid, TextField, Button, Typography, Container } from '@mui/material';
-import { ButtonUsage, Floater, Username, Password } from "../components.js";
+import { Grid, Button, Typography, Container } from "@mui/material";
+import { ButtonUsage, Username, Password } from "../components.js";
+import { useNavigate } from "react-router-dom";
 
-class Login extends React.Component {
-    
-    // What you want to be returned / rendered on the screen
-    render (){
-        return (
-            <div>
-                <Container component="main" maxWidth="xs">
-                    <Grid container spacing={2} direction="column" alignItems="center" justifyContent="center"
-                        style={{ minHeight: '100vh', marginTop: '-35%' }}>
-                        {/* Log in Header */}
-                        <Grid item>
-                            <Typography variant="h4" component="h1">
-                            Log in
-                            </Typography>
-                        </Grid>
+const Login = () => {
+  const navigate = useNavigate();
 
-                        {/* Username Field */}
-                        <Grid item xs={12}>
-                            <Username/>
-                        </Grid>
+  const handleRedirect = (event) => {
+    event.preventDefault();
+    navigate("/createaccount");
+  };
 
-                        {/* Password Field */}
-                        <Grid item xs={12}>
-                            <Password text="Password"/>
-                        </Grid>
+  const handleSubmit = () => {
+    //fill out however
+    alert("Boom bow bang");
+  };
 
-                        {/* Submit Button */}
-                        <Grid item xs={12}>
-                            <ButtonUsage text="Login"/>
-                        </Grid>
+  return (
+    <form onSubmit={handleSubmit}>
+      <Container component="main" maxWidth="xs">
+        <Grid
+          container
+          spacing={2}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          style={{ minHeight: "100vh", marginTop: "-35%" }}
+        >
+          <Grid item>
+            <Typography variant="h4" component="h1">
+              Log in
+            </Typography>
+          </Grid>
 
-                        {/* Account Creation Link */}
-                        <Grid item xs={12} style = {{marginTop:"18%"}}>
-                        <Typography variant="body2" align="center">
-                            Don't have an account?{' '}
-                        </Typography>
-                        </Grid>
+          <Grid item xs={12}>
+            <Username name="username" id="username" />
+          </Grid>
 
-                        
-                        <Grid item xs={12} style = {{marginTop:"-4%"}}>
-                            <Button color="primary">
-                                Create Account
-                            </Button>
-                        </Grid>
+          <Grid item xs={12}>
+            <Password text="Password" id="password" name="password" />
+          </Grid>
 
-                    </Grid>
-                </Container>
-            </div>
-        )
+          <Grid item xs={12}>
+            <ButtonUsage text="Login" />
+          </Grid>
 
-
-    }
-}
+          <Grid item xs={12} style={{ marginTop: "18%" }}>
+            <Typography variant="body2" align="center">
+              Don't have an account?{" "}
+              <Button color="primary" onClick={handleRedirect}>
+                Create Account
+              </Button>
+            </Typography>
+          </Grid>
+        </Grid>
+      </Container>
+    </form>
+  );
+};
 
 export default Login;
