@@ -15,10 +15,16 @@ import {
   FormControl,
   Tooltip,
   FormHelperText,
+  Container,
+  AppBar,
+  Toolbar,
+  Typography,
+  Grid,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import "./App.css";
 
 // text prop inserts itself into the button
 const ButtonUsage = ({ text }) => {
@@ -76,15 +82,12 @@ const Password = ({ text, onChange, name, value, error, helperText, id }) => {
   };
 
   return (
-    <FormControl sx={{ width: "25ch" }} variant="standard" error = {error}>
-      <InputLabel
-        htmlFor={id}
-        variant="standard"
-      >
+    <FormControl sx={{ width: "25ch" }} variant="standard" error={error}>
+      <InputLabel htmlFor={id} variant="standard">
         {text}
       </InputLabel>
       <Input
-        id = {id}
+        id={id}
         type={showPassword ? "text" : "password"}
         name={name}
         value={value}
@@ -135,5 +138,50 @@ const HoverTip = ({ text }) => {
   );
 };
 
+const NavBar = () => {
+  return (
+    <AppBar position="static" style={{ backgroundColor: "lightgray" }}>
+      <Container maxWidth="false">
+        <Toolbar disableGutters>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Button
+              href="/home"
+              sx={{
+                "& .MuiTouchRipple-root": {
+                  color: "gray", // Change this to your desired ripple color
+                },
+              }}
+            >
+              <Typography variant="h7" style={{ color: "black" }}>
+                Logo
+              </Typography>
+            </Button>
+            <Button
+              sx={{
+                "& .MuiTouchRipple-root": {
+                  color: "gray", // Change this to your desired ripple color
+                },
+              }}
+            >
+              <Typography variant="h7" style={{ color: "black" }}>
+                Sign Out
+              </Typography>
+            </Button>
+          </Grid>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+};
+
+const Recipe = () => {
+  return <></>;
+};
+
 // make sure the other files can read these functions (cannot be defaulted)
-export { Floater, ButtonUsage, Username, Password, HoverTip };
+export { Floater, ButtonUsage, Username, Password, HoverTip, NavBar };
