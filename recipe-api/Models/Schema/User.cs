@@ -7,8 +7,6 @@ namespace Recipe.Models.Schema;
 [Table("users", Schema = "data")]
 public class User {
 
-#nullable disable
-
     //Min requirements will be checked on UI and Service layer.
     public static readonly int MIN_USERNAME_LENGTH = 2;
     public static readonly int MIN_PASSWORD_LENGTH = 7;
@@ -18,7 +16,7 @@ public class User {
     public static readonly int MAX_PASSWORD_LENGTH = 40; //This requirement is for the password itself, not the hash.
     public static readonly int MAX_USERNAME_LENGTH = 30;
 
-
+#nullable disable
     [Key]
     [Column("id")]
     public Guid Id { get; set; }

@@ -1,6 +1,9 @@
 using Recipe.Data;
 using Recipe.Services.Users;
 using Microsoft.EntityFrameworkCore;
+using Recipe.Services.Recipes;
+using Recipe.Services.Ingredients;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
 
-
 builder.Services.AddScoped<IUserService, UserService>(); //AddSingleton, AddScoped, AddTransient
+builder.Services.AddScoped<IRecipeService, RecipeService>(); //AddSingleton, AddScoped, AddTransient
+builder.Services.AddScoped<IIngredientService, IngredientService>(); //AddSingleton, AddScoped, AddTransient
 
 
 builder.Services.AddEndpointsApiExplorer();

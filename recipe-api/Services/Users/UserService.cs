@@ -18,22 +18,16 @@ public class UserService : IUserService {
         _passwordHasher = new PasswordHasher<User>();
     }
 
-    public ErrorOr<Created> CreateUser(CreateOrUpdateUserRequest userRequest)
+    public ErrorOr<Created> CreateUser(CreateUserRequest userRequest)
     {
+
+        ErrorOr<Created> validationResults = userRequest.Validate();
+        if (validationResults.IsError){
+            return validationResults;
+        }
+
         if (doesUserNameExist(userRequest.Username)){
             return Errors.User.UsernameExists;
-        }
-
-        if (userRequest.Username.Length < User.MIN_USERNAME_LENGTH){
-            return Errors.User.UsernameTooShort;
-        } else if (userRequest.Username.Length > User.MAX_USERNAME_LENGTH){
-            return Errors.User.UsernameTooLong;
-        }
-
-        if (userRequest.Password.Length < User.MIN_USERNAME_LENGTH){
-            return Errors.User.PasswordTooShort;
-        } else if (userRequest.Password.Length > User.MAX_PASSWORD_LENGTH){
-            return Errors.User.PasswordTooLong;
         }
 
         User user = new User(
@@ -60,7 +54,7 @@ public class UserService : IUserService {
         return user.toDto();
     }
 
-    public ErrorOr<Updated> UpdateUser(Guid id, CreateOrUpdateUserRequest userRequest)
+    public ErrorOr<Updated> UpdateUser(Guid id, UpdateUserRequest userRequest)
     {
         var user = _dbContext.Users.Find(id);
 
@@ -72,18 +66,16 @@ public class UserService : IUserService {
             if (doesUserNameExist(userRequest.Username)){
                 return Errors.User.UsernameExists;
             }
-            if (userRequest.Username.Length < User.MIN_USERNAME_LENGTH){
-                return Errors.User.UsernameTooShort;
-            } else if (userRequest.Username.Length > User.MAX_USERNAME_LENGTH){
-                return Errors.User.UsernameTooLong;
+            ErrorOr<Updated> validationResults = userRequest.ValidateUsername();
+            if (validationResults.IsError){
+                return validationResults;
             }
         }
 
         if (user.Password != userRequest.Password){
-            if (userRequest.Password.Length < User.MIN_PASSWORD_LENGTH){
-                return Errors.User.PasswordTooShort;
-            } else if (userRequest.Password.Length > User.MAX_PASSWORD_LENGTH){
-                return Errors.User.PasswordTooLong;
+            ErrorOr<Updated> validationResults = userRequest.ValidatePassword();
+            if (validationResults.IsError){
+                return validationResults;
             }
         }
 

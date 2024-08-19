@@ -14,3 +14,17 @@ Requirements:
         - Must be unique (thats a server thing)
         - Min: 2
         - Max: 30
+- Ingredients:
+    - Description:
+        - Max: 100
+- Recipes:
+    - Name:
+        - Min: 1
+        - Max: 100
+    - Directions:
+        - Max: 1000
+
+
+Do we want users to be able to delete their accounts?
+ - Probably not, but if we do allow this, make sure to have a CONFIRMATION POPUP because currently, deleting a User will cascade delete all of their 
+    recipes (even if others are using them).

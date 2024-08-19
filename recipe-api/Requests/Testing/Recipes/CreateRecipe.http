@@ -1,0 +1,24 @@
+POST http://localhost:5072/recipes
+Content-Type: application/json
+
+{
+    "createdByUserId": "8d608d70-8ee1-454a-9362-5f0908f3bd5a",
+    "name": "Delicious Recipe",
+    "ingredients": [
+        {
+            "name": "Flour",
+            "orderIndex": "1"
+        },
+        {
+            "name": "Sugar",
+            "orderIndex": "2",
+            "amount": 100.1,
+            "amountUnits": "grams",
+            "description": "Granulated sugar"
+        }
+    ],
+    "difficulty": "moderate",
+    "numericTimeAmount": 30.0,
+    "timeAmountUnits": "min",
+    "directions": "Heat olive oil in a pan over medium heat. Sauté onion and garlic until softened. Add ground beef, cook until browned. Stir in diced tomatoes, tomato paste, beef broth, basil, oregano, salt, and pepper. Simmer for 30 minutes. Cook spaghetti according to package instructions. Drain. Serve sauce over spaghetti. Top with Parmesan if desired. Heat olive oil in a pan over medium heat. Sauté onion and garlic until softened. Add ground beef, cook until browned. Stir in diced tomatoes, tomato paste, beef broth, basil, oregano, salt, and pepper. Simmer for 30 minutes. Cook spaghetti according to package instructions. Drain. Serve sauce over spaghetti. Top with Parmesan if desired."
+}

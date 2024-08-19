@@ -15,7 +15,7 @@ public class UsersController : ApiController {
     }
 
     [HttpPost("")]
-    public IActionResult CreateUser([FromBody] CreateOrUpdateUserRequest userRequest) {
+    public IActionResult CreateUser([FromBody] CreateUserRequest userRequest) {
 
         ErrorOr<Created> createUserResult = _userService.CreateUser(userRequest);
 
@@ -48,7 +48,7 @@ public class UsersController : ApiController {
     // }
 
     [HttpPut("{id:guid}")]
-    public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] CreateOrUpdateUserRequest userRequest) {
+    public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] UpdateUserRequest userRequest) {
 
         ErrorOr<Updated> updateUserResult = _userService.UpdateUser(id, userRequest);
 
@@ -69,7 +69,15 @@ public class UsersController : ApiController {
         );
     }
 
-    private CreatedAtActionResult CreatedAtGetUser(CreateOrUpdateUserRequest userRequest){
+    private CreatedAtActionResult CreatedAtGetUser(CreateUserRequest userRequest){
+        return CreatedAtAction(
+            actionName: nameof(CreateUser),
+            routeValues: new { username = userRequest.Username },
+            value: userRequest.Username
+        );
+    }
+
+    private CreatedAtActionResult CreatedAtGetUser(UpdateUserRequest userRequest){
         return CreatedAtAction(
             actionName: nameof(CreateUser),
             routeValues: new { username = userRequest.Username },
