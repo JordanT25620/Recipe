@@ -17,6 +17,10 @@ public record CreateRecipeRequest(
 {
     public ErrorOr<Created> Validate(){
 
+        if (Ingredients.Count < 1){
+            return Errors.Recipe.MustHaveIngredients;
+        }
+
         if (Name.Length < RecipeObj.MIN_NAME_LENGTH){
             return Errors.Recipe.NameTooShort;
         } else if (Name.Length > RecipeObj.MAX_NAME_LENGTH){

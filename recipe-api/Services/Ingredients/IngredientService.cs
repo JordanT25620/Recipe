@@ -1,11 +1,8 @@
 using ErrorOr;
 using Recipe.Data;
 using Recipe.Models.Dto;
-using Recipe.Models.Enums;
 using Recipe.Models.Schema;
 using Recipe.Requests.HttpModels.Recipes;
-using Recipe.Requests.HttpModels.Users;
-using Recipe.ServiceErrors;
 
 namespace Recipe.Services.Ingredients;
 
@@ -41,5 +38,17 @@ public class IngredientService : IIngredientService {
         _dbContext.SaveChanges();
 
         return Result.Created;
+    }
+
+    //Returns an empty list if no ingredients exist for a user (but they should).
+    public List<IngredientDto> GetRecipeIngredients(Guid recipeId){
+        var recipeIngredients = _dbContext.Ingredients
+            .Where(i => i.RecipeId == recipeId)
+            .Select(
+                i => i.toDto()
+            )
+            .ToList();
+
+        return recipeIngredients;
     }
 }

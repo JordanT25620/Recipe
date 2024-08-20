@@ -66,18 +66,28 @@ public class RecipeService : IRecipeService {
         return Result.Created;
     }
 
-    public ErrorOr<Deleted> DeleteRecipe(Guid id)
+    public ErrorOr<List<RecipeDto>> GetUserRecipes(Guid id)
     {
-        throw new NotImplementedException();
-    }
+        var user = _dbContext.Users.Find(id);
+        if (user is null) {
+            return Errors.Recipe.UserDoesNotExist;
+        }
+        var userDto = user.toDto();
 
-    public ErrorOr<UserDto> GetRecipe(Guid id)
-    {
-        throw new NotImplementedException();
-    }
+        var userRecipes = _dbContext.Recipes.Where(r => r.CreatedByUserId == id).ToList();
+        
+        var results = new List<RecipeDto>();
+    
+        foreach (var recipe in userRecipes)
+        {
+            results.Add(
+                recipe.toDto(
+                    userDto,
+                    _ingredientService.GetRecipeIngredients(recipe.Id)
+                )
+            );
+        }
 
-    public ErrorOr<Updated> UpdateRecipe(Guid id, CreateRecipeRequest recipeRequest)
-    {
-        throw new NotImplementedException();
+        return results;
     }
 }

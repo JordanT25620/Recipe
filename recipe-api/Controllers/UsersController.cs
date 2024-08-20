@@ -3,15 +3,18 @@ using Recipe.Models.Dto;
 using Recipe.Services.Users;
 using Microsoft.AspNetCore.Mvc;
 using Recipe.Requests.HttpModels.Users;
+using Recipe.Services.Recipes;
 
 namespace Recipe.Controllers;
 
 public class UsersController : ApiController {
 
     private readonly IUserService _userService;
+    private readonly IRecipeService _recipeService;
     
-    public UsersController(IUserService userService){
+    public UsersController(IUserService userService, IRecipeService recipeService){
         _userService = userService;
+        _recipeService = recipeService;
     }
 
     [HttpPost("")]
@@ -36,17 +39,6 @@ public class UsersController : ApiController {
         );
     }
 
-    // [HttpPut("{id:guid}")]
-    // public IActionResult UpsertUser([FromRoute] Guid id, [FromBody] CreateOrUpdateUserRequest userRequest) {
-
-    //     ErrorOr<UpsertedUser> upsertUserResult = _userService.UpsertUser(id, userRequest);
-
-    //     return upsertUserResult.Match(
-    //         upsertedUser => upsertedUser.isNewlyCreated ? CreatedAtGetUser(userRequest) : NoContent(), 
-    //         errors => Problem(errors)
-    //     );
-    // }
-
     [HttpPut("{id:guid}")]
     public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] UpdateUserRequest userRequest) {
 
@@ -68,6 +60,28 @@ public class UsersController : ApiController {
             errors => Problem(errors)
         );
     }
+
+    [HttpGet("{id:guid}/recipes")]
+    public IActionResult GetUserRecipes([FromRoute] Guid id) {
+
+        ErrorOr<List<RecipeDto>> getUserRecipesResult = _recipeService.GetUserRecipes(id);
+
+        return getUserRecipesResult.Match(
+            recipeList => Ok(recipeList),
+            errors => Problem(errors)
+        );
+    }
+
+    // [HttpPut("{id:guid}")]
+    // public IActionResult UpsertUser([FromRoute] Guid id, [FromBody] CreateOrUpdateUserRequest userRequest) {
+
+    //     ErrorOr<UpsertedUser> upsertUserResult = _userService.UpsertUser(id, userRequest);
+
+    //     return upsertUserResult.Match(
+    //         upsertedUser => upsertedUser.isNewlyCreated ? CreatedAtGetUser(userRequest) : NoContent(), 
+    //         errors => Problem(errors)
+    //     );
+    // }
 
     private CreatedAtActionResult CreatedAtGetUser(CreateUserRequest userRequest){
         return CreatedAtAction(

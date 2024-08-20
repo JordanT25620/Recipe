@@ -26,50 +26,6 @@ public class RecipesController : ApiController {
         );
     }
 
-    // [HttpGet("{id:guid}")]
-    // public IActionResult GetRecipe([FromRoute] Guid id) {
-
-    //     ErrorOr<RecipeDto> getRecipeResult = _recipeService.GetRecipe(id);
-
-    //     return getRecipeResult.Match(
-    //         recipe => Ok(recipe),
-    //         errors => Problem(errors)
-    //     );
-    // }
-
-    // [HttpPut("{id:guid}")]
-    // public IActionResult UpsertRecipe([FromRoute] Guid id, [FromBody] CreateOrUpdateRecipeRequest recipeRequest) {
-
-    //     ErrorOr<UpsertedRecipe> upsertRecipeResult = _recipeService.UpsertRecipe(id, recipeRequest);
-
-    //     return upsertRecipeResult.Match(
-    //         upsertedRecipe => upsertedRecipe.isNewlyCreated ? CreatedAtGetRecipe(recipeRequest) : NoContent(), 
-    //         errors => Problem(errors)
-    //     );
-    // }
-
-    // [HttpPut("{id:guid}")]
-    // public IActionResult UpdateRecipe([FromRoute] Guid id, [FromBody] CreateOrUpdateRecipeRequest recipeRequest) {
-
-    //     ErrorOr<Updated> updateRecipeResult = _recipeService.UpdateRecipe(id, recipeRequest);
-
-    //     return updateRecipeResult.Match(
-    //         updated =>  NoContent(),
-    //         errors => Problem(errors)
-    //     );
-    // }
-
-    // [HttpDelete("{id:guid}")]
-    // public IActionResult DeleteRecipe([FromRoute] Guid id) {
-
-    //     ErrorOr<Deleted> deleteRecipeResult = _recipeService.DeleteRecipe(id);
-
-    //     return deleteRecipeResult.Match(
-    //         deleted => NoContent(),
-    //         errors => Problem(errors)
-    //     );
-    // }
-
     private CreatedAtActionResult CreatedAtGetRecipe(CreateRecipeRequest recipeRequest){
         return CreatedAtAction(
             actionName: nameof(CreateRecipe),

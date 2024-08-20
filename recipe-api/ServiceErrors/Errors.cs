@@ -67,6 +67,10 @@ public static class Errors{
             code: "Recipe.IngredientsOutOfOrder",
             description: "Ingredients should be supplied with order indices starting with 1 and incrementing by 1. No gaps are allowed. Correct example: 1, 2, 3, 4... "
         );
+        public static Error MustHaveIngredients => Error.Validation(
+            code: "Recipe.MustHaveIngredients",
+            description: "At least 1 ingredient must be provided to save a recipe"
+        );
     }
 
     public static class Ingredient{
