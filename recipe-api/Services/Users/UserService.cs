@@ -1,4 +1,5 @@
 using ErrorOr;
+using Microsoft.AspNetCore.Identity;
 using Recipe.Data;
 using Recipe.Models.Dto;
 using Recipe.Models.Schema;
@@ -10,20 +11,23 @@ namespace Recipe.Services.Users;
 public class UserService : IUserService {
 
     private readonly ApplicationDbContext _dbContext;
-    private const int REQUIRED_PASSWORD_LENGTH = 7;
+    private readonly PasswordHasher<User> _passwordHasher;
 
     public UserService(ApplicationDbContext context){
         _dbContext = context;
+        _passwordHasher = new PasswordHasher<User>();
     }
 
-    public ErrorOr<Created> CreateUser(CreateOrUpdateUserRequest userRequest)
+    public ErrorOr<Created> CreateUser(CreateUserRequest userRequest)
     {
-        if (doesUserNameExist(userRequest.Username)){
-            return Errors.User.UsernameExists;
+
+        ErrorOr<Created> validationResults = userRequest.Validate();
+        if (validationResults.IsError){
+            return validationResults;
         }
 
-        if (userRequest.Password.Length < REQUIRED_PASSWORD_LENGTH){
-            return Errors.User.PasswordLengthRequirement;
+        if (doesUserNameExist(userRequest.Username)){
+            return Errors.User.UsernameExists;
         }
 
         User user = new User(
@@ -33,6 +37,8 @@ public class UserService : IUserService {
             DateTime.UtcNow,
             DateTime.UtcNow
         );
+        user.Password = _passwordHasher.HashPassword(user, userRequest.Password);
+
         _dbContext.Users.Add(user);
         _dbContext.SaveChanges();
 
@@ -48,7 +54,7 @@ public class UserService : IUserService {
         return user.toDto();
     }
 
-    public ErrorOr<Updated> UpdateUser(Guid id, CreateOrUpdateUserRequest userRequest)
+    public ErrorOr<Updated> UpdateUser(Guid id, UpdateUserRequest userRequest)
     {
         var user = _dbContext.Users.Find(id);
 
@@ -60,15 +66,22 @@ public class UserService : IUserService {
             if (doesUserNameExist(userRequest.Username)){
                 return Errors.User.UsernameExists;
             }
+            ErrorOr<Updated> validationResults = userRequest.ValidateUsername();
+            if (validationResults.IsError){
+                return validationResults;
+            }
         }
 
-        if (userRequest.Password.Length < REQUIRED_PASSWORD_LENGTH){
-            return Errors.User.PasswordLengthRequirement;
+        if (user.Password != userRequest.Password){
+            ErrorOr<Updated> validationResults = userRequest.ValidatePassword();
+            if (validationResults.IsError){
+                return validationResults;
+            }
         }
 
         user.Username = userRequest.Username;
-        user.Password = userRequest.Password;
         user.UpdatedAt = DateTime.UtcNow;
+        user.Password = _passwordHasher.HashPassword(user, userRequest.Password);
 
         _dbContext.Users.Update(user);
         _dbContext.SaveChanges();

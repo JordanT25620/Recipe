@@ -10,19 +10,20 @@ User:
 
 Recipe:
 - id (PK)
-- createdByUserId: int (references User.id) CASCADE DELETE
-- difficultyId: int (references Difficulty.id) NULL
-- timeRequired: int NULL
-- timeRequiredUnits: string NOT NULL
+- name NOT NULL
+- createdByUserId: Guid (references User.id) CASCADE NULL
+- difficultyId: string NULL
+- timeRequired: double NULL
+- timeRequiredUnits: string NULL
 - picture/icon? : blob? NULL (for now)
 - createdOn: Date NOT NULL Default - UTCNOW()
 - updatedOn: Date NOT NULL Default - UTCNOW()
 
 Ingredient:
 - id (PK)
-- recipeId (references Recipe.id) NOT NULL
+- recipeId (references Recipe.id) NOT NULL CASCADE DELETE
 - name: string NOT NULL
-- amount: int NULL (very suggested to enter this though... unless for spices or something)
+- amount: double NULL (very suggested to enter this though... unless for spices or something)
 - amountUnits: string NULL (CONSTRAINT IF amount != null, this cant be null either)
 - description: string (LONG string in DB... determine the number of characters allowed on UI)
 - orderIndex: int NOT NULL
@@ -37,6 +38,7 @@ RecipeTag: (1 -> many .... recipe -> recipetag)
 Still have the enum in the C# and React though, just make "Unknown" as the default/backup. 
 
 Difficulty: (1 of these per Recipe) --- Users DONT CREATE THESE, they are preset in the DB.
+Scratch that... these are not stored in the DB but as an ENUM on both the UI and API.
 - id: Guid (PK)
 - name: string NOT NULL + UNIQUE
 - colorName: string Default NULL

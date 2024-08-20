@@ -2,6 +2,41 @@ Recipe Sharing API w/ QR codes
 - The app is free and do not need an account UNLESS you are creating a recipe to share.
 - It is a WEB APP, but especially designed to fit a phone screen.
 
+Endpoints:
+
+Users:
+    POST /users
+    GET /users/<id>
+    PUT /users/<id>
+    DELETE /users/<id>
+    GET /users/<id>/recipes
+Recipes:
+    POST /recipes
+
+
 
 Considerations for ui-api sync:
-- Registration forms need to set minimum password length to 7 before successful registration.
+
+Requirements:
+- Registration forms:
+    - Password length:
+        - Min: 7
+        - Max: 40
+    - Username:
+        - Must be unique (thats a server thing)
+        - Min: 2
+        - Max: 30
+- Ingredients:
+    - Description:
+        - Max: 100
+- Recipes:
+    - Name:
+        - Min: 1
+        - Max: 100
+    - Directions:
+        - Max: 1000
+
+
+Do we want users to be able to delete their accounts?
+ - Probably not, but if we do allow this, make sure to have a CONFIRMATION POPUP because currently, deleting a User will cascade delete all of their 
+    recipes (even if others are using them).

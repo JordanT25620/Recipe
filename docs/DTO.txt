@@ -2,6 +2,7 @@ Add Dto to the end of each of their names.
 
 Recipe:
 - id: Guid
+- name: string (limit to 50 chars)
 - ingredients: List<Ingredient> (require at least 1 ingredient before being able to create/save the recipe, so this is not null)
 - createdByUser: User
 - difficulty?: Difficulty
@@ -13,11 +14,11 @@ Recipe:
 - updatedOn: Dat
 
 TimeAmountDto (neither field is nullable because the actual timeRequired property of the Recipe is nullable instead):
-- numericAmount: int
+- numericAmount: double
 - units: enum TimeAmountUnits
 
 IngredientAmountDto (neither field is nullable because the actual timeRequired property of the Recipe is nullable instead):
-- numericAmount: int
+- numericAmount: double
 - units: enum IngredientAmountUnits
 
 User:

@@ -13,4 +13,15 @@ public class ApplicationDbContext : DbContext {
     public DbSet<User> Users { get; set; } = null!;
     #endregion
 
+    #region Ingredients
+    public DbSet<Ingredient> Ingredients { get; set; } = null!;
+    #endregion
+
+    #region Recipes
+    public DbSet<RecipeObj> Recipes { get; set; } = null!;
+    #endregion
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder){
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+    }
 }
