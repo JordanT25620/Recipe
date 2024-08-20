@@ -20,10 +20,13 @@ import {
   Toolbar,
   Typography,
   Grid,
+  Box,
+  OutlinedInput,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import CloseIcon from "@mui/icons-material/Close";
 import "./App.css";
 
 // text prop inserts itself into the button
@@ -31,8 +34,7 @@ const ButtonUsage = ({ text }) => {
   return (
     <div>
       <Button type="submit" variant="contained" color="primary">
-        {" "}
-        {text}{" "}
+        {text}
       </Button>
     </div>
   );
@@ -155,6 +157,9 @@ const NavBar = () => {
                 "& .MuiTouchRipple-root": {
                   color: "gray", // Change this to your desired ripple color
                 },
+                ":hover": {
+                  backgroundColor: "Silver", // Change this to your desired hover color
+                },
               }}
             >
               <Typography variant="h7" style={{ color: "black" }}>
@@ -165,6 +170,9 @@ const NavBar = () => {
               sx={{
                 "& .MuiTouchRipple-root": {
                   color: "gray", // Change this to your desired ripple color
+                },
+                ":hover": {
+                  backgroundColor: "Silver", // Change this to your desired hover color
                 },
               }}
             >
@@ -180,8 +188,73 @@ const NavBar = () => {
 };
 
 const Recipe = () => {
-  return <></>;
+  return (
+    <Box sx={{ p: 0.5 }}>
+      <center>
+        <Box
+          component="section"
+          sx={{
+            width: "80%",
+            backgroundColor: "lightgray",
+            borderRadius: 4,
+            display: "flex",
+            height: "250px",
+          }}
+        >
+          <Button
+            variant="text"
+            sx={{
+              width: "100%",
+              height: "100%", // Ensures the Button takes up the full height of the Box
+              display: "flex",
+              flexDirection: "column", // Allows content inside Button to be laid out in a column
+              borderRadius: 4,
+              color: "black",
+              ":hover": {
+                backgroundColor: "Silver", // Change this to your desired hover color
+              },
+            }}
+          >
+            <Grid container direction="column" spacing={2}>
+              <Grid item>
+                <Typography variant="h5">Spaghetti Bolognese</Typography>
+              </Grid>
+              <Grid container item spacing={2} wrap="wrap">
+                <Grid item xs={4}>
+                  <Typography variant="h7">Spaghetti Noodles</Typography>
+                </Grid>
+                <Grid item xs={4}>
+                  <Typography variant="h7">Hot sauce</Typography>
+                </Grid>
+                <Grid item xs={4}>
+                  <Typography variant="h7">Meatballs</Typography>
+                </Grid>
+                <Grid item xs={4}>
+                  <Typography variant="h7">Garlic Bread</Typography>
+                </Grid>
+                <Grid item xs={4}>
+                  <Typography variant="h7">Spices and herbs</Typography>
+                </Grid>
+                <Grid item xs={4}>
+                  <Typography variant="h7">Vinegar</Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+            {/* <Typography>**Stuff that goes inside the box**</Typography> */}
+          </Button>
+        </Box>
+      </center>
+    </Box>
+  );
 };
 
 // make sure the other files can read these functions (cannot be defaulted)
-export { Floater, ButtonUsage, Username, Password, HoverTip, NavBar };
+export {
+  Floater,
+  ButtonUsage,
+  Username,
+  Password,
+  HoverTip,
+  NavBar,
+  Recipe,
+};

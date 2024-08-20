@@ -8,7 +8,7 @@ const Login = () => {
 
   const handleRedirect = (event) => {
     event.preventDefault();
-    navigate("/createaccount");
+    navigate("/register");
   };
 
   const handleSubmit = () => {

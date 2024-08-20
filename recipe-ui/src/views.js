@@ -7,8 +7,9 @@ import {
   Navigate,
 } from "react-router-dom";
 import Login from "./pages/login.js";
-import CreateAccount from "./pages/create_account.js";
+import CreateAccount from "./pages/createAccount.js";
 import Home from "./pages/home.js";
+import CreateRecipe from "./pages/createRecipe.js";
 import PageNotFound from "./pages/pagenotfound.js";
 
 const Views = () => {
@@ -18,8 +19,9 @@ const Views = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/create" element={<CreateRecipe />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/createaccount" element={<CreateAccount />} />
+          <Route path="/register" element={<CreateAccount />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>

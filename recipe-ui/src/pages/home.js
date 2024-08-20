@@ -6,6 +6,7 @@ import {
   Password,
   NavBar,
   Floater,
+  Recipe,
 } from "../components.js";
 
 import { Grid, Button, Typography, Container } from "@mui/material";
@@ -16,7 +17,7 @@ const Home = () => {
       <Grid
         container
         direction="column"
-        style={{ height: "100vh", position: "relative" }}
+        justifyItems={"center"}
       >
         <Grid item>
           <NavBar />
@@ -27,6 +28,8 @@ const Home = () => {
           </center>
         </Grid>
         <Grid item padding={2}>
+            <Recipe />
+            <Recipe />
           {/* Enter the recipes here */}
         </Grid>
         <Grid
