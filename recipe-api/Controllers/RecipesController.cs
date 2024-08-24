@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Recipe.Requests.HttpModels.Recipes;
 using Recipe.Services.Recipes;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Recipe.Controllers;
 
@@ -16,6 +17,7 @@ public class RecipesController : ApiController {
     }
 
     [HttpPost("")]
+    [Authorize]
     public IActionResult CreateRecipe([FromBody] CreateRecipeRequest recipeRequest) {
 
         ErrorOr<Created> createRecipeResult = _recipeService.CreateRecipe(recipeRequest);

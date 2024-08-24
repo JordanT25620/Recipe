@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Recipe.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ApiController : ControllerBase {
 
     protected IActionResult Problem(List<Error> errors){

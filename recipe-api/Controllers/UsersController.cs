@@ -4,6 +4,7 @@ using Recipe.Services.Users;
 using Microsoft.AspNetCore.Mvc;
 using Recipe.Requests.HttpModels.Users;
 using Recipe.Services.Recipes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Recipe.Controllers;
 
@@ -29,6 +30,7 @@ public class UsersController : ApiController {
     } 
 
     [HttpGet("{id:guid}")]
+    [Authorize]
     public IActionResult GetUser([FromRoute] Guid id) {
 
         ErrorOr<UserDto> getUserResult = _userService.GetUser(id);
@@ -40,6 +42,7 @@ public class UsersController : ApiController {
     }
 
     [HttpPut("{id:guid}")]
+    [Authorize]
     public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] UpdateUserRequest userRequest) {
 
         ErrorOr<Updated> updateUserResult = _userService.UpdateUser(id, userRequest);
@@ -51,6 +54,7 @@ public class UsersController : ApiController {
     }
 
     [HttpDelete("{id:guid}")]
+    [Authorize]
     public IActionResult DeleteUser([FromRoute] Guid id) {
 
         ErrorOr<Deleted> deleteUserResult = _userService.DeleteUser(id);
@@ -62,6 +66,7 @@ public class UsersController : ApiController {
     }
 
     [HttpGet("{id:guid}/recipes")]
+    [Authorize]
     public IActionResult GetUserRecipes([FromRoute] Guid id) {
 
         ErrorOr<List<RecipeDto>> getUserRecipesResult = _recipeService.GetUserRecipes(id);
