@@ -28,6 +28,17 @@ public class RecipesController : ApiController {
         );
     }
 
+    [HttpGet("{id:guid}")]
+    public IActionResult GetRecipe([FromRoute] Guid id) {
+
+        ErrorOr<RecipeDto> getRecipeResult = _recipeService.GetRecipe(id);
+
+        return getRecipeResult.Match(
+            recipe => Ok(recipe),
+            errors => Problem(errors)
+        );
+    }
+
     private CreatedAtActionResult CreatedAtGetRecipe(CreateRecipeRequest recipeRequest){
         return CreatedAtAction(
             actionName: nameof(CreateRecipe),
