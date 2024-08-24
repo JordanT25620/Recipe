@@ -66,6 +66,26 @@ public class RecipeService : IRecipeService {
         return Result.Created;
     }
 
+    public ErrorOr<RecipeDto> GetRecipe(Guid id)
+    {
+
+        var recipe = _dbContext.Recipes.Find(id);
+        if (recipe is null) {
+            return Errors.Recipe.NotFound;
+        }
+
+        var user = _dbContext.Users.Find(recipe.CreatedByUserId);
+        if (user is null) {
+            return Errors.Recipe.UserDoesNotExist;
+        }
+        var userDto = user.toDto();
+
+        return recipe.toDto(
+            userDto, 
+            _ingredientService.GetRecipeIngredients(recipe.Id)
+        );
+    }
+
     public ErrorOr<List<RecipeDto>> GetUserRecipes(Guid id)
     {
         var user = _dbContext.Users.Find(id);

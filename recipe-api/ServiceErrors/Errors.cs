@@ -77,6 +77,10 @@ public static class Errors{
             code: "Recipe.MustHaveIngredients",
             description: "At least 1 ingredient must be provided to save a recipe"
         );
+        public static Error NotFound => Error.NotFound(
+            code: "Recipe.NotFound",
+            description: "Recipe not found"
+        );
     }
 
     public static class Ingredient{
