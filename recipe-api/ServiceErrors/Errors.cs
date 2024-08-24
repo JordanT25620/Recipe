@@ -29,6 +29,12 @@ public static class Errors{
             description: "Password exceeds the maximum length requirements"
         );
     }
+    public static class Auth{
+        public static Error InvalidCredentials => Error.NotFound(
+            code: "Auth.InvalidCredentials",
+            description: "Credentials are invalid or account does not exist"
+        );
+    }
 
     public static class Recipe{
         public static Error GuidFailedParsing => Error.Validation(

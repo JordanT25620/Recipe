@@ -12,6 +12,7 @@ Users:
     GET /users/<id>/recipes
 Recipes:
     POST /recipes
+    GET /recipes/<id> --- Still need to write
 
 
 

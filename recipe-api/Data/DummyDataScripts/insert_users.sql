@@ -1,32 +1,91 @@
 INSERT INTO "data".users (id, username, "password", "createdAt", "updatedAt")
 VALUES
-    ('8d608d70-8ee1-454a-9362-5f0908f3bd5a', 'JordanLightning102', 'SecurePass1!', '2024-08-01T12:00:00Z', '2024-08-01T12:00:00Z'),
-    ('02b53803-f29c-45d0-8263-2216992bb1de', 'TechGuru88', 'Techy$2024', '2024-08-02T13:00:00Z', '2024-08-02T13:00:00Z'),
-    ('bd784396-b978-4692-ae30-1cc5f4fb8db0', 'GamerGeekXtreme', 'G@m3r$2024!', '2024-08-03T14:00:00Z', '2024-08-03T14:00:00Z'),
-    ('cb7a33a7-a645-48b9-9240-f6eed865deb4', 'CookingMaestro', 'Delicious#1', '2024-08-04T15:00:00Z', '2024-08-04T15:00:00Z'),
-    ('806a7ea5-90c0-4006-a501-eddd65efa7ed', 'TravelBug2024', 'Wanderlust!', '2024-08-05T16:00:00Z', '2024-08-05T16:00:00Z'),
-    ('02ff269a-2174-4529-bb38-e91632bbe74e', 'FitnessFanatic', 'Fit4Life#2024', '2024-08-06T17:00:00Z', '2024-08-06T17:00:00Z'),
-    ('b12ff510-7e7a-468f-bbbe-e34524cf5076', 'MusicLover88', 'Mus!c4You', '2024-08-07T18:00:00Z', '2024-08-07T18:00:00Z'),
-    ('30eb9215-f177-47a0-ba3e-684e4f264043', 'BookWorm101', 'ReadMore@2024', '2024-08-08T19:00:00Z', '2024-08-08T19:00:00Z'),
-    ('c2473940-547f-45ac-ab75-b89e07c444c6', 'ArtisticSoul22', 'Creat3Art!', '2024-08-09T20:00:00Z', '2024-08-09T20:00:00Z'),
-    ('7bf52f3d-617f-4614-b48d-3c832715e924', 'TechieTribe', 'Innovate#2024', '2024-08-10T21:00:00Z', '2024-08-10T21:00:00Z'),
-    ('d9fda9b5-2dab-4475-992f-c67d55b70fde', 'DesignWizard', 'Create@2024', '2024-08-11T22:00:00Z', '2024-08-11T22:00:00Z'),
-    ('bf298cc0-6723-449d-949d-d309936319ad', 'JordanFlash2024', 'Flash@2024!', '2024-08-12T23:00:00Z', '2024-08-12T23:00:00Z'),
-    ('ba39adef-c9df-4488-b8be-ec13d8453ec1', 'CleverFox90', 'FoxClever#1', '2024-08-13T12:00:00Z', '2024-08-13T12:00:00Z'),
-    ('2006df37-120a-4e3a-b069-0b0b6f5153c8', 'CreativeMinds', 'Mindset@2024', '2024-08-14T13:00:00Z', '2024-08-14T13:00:00Z'),
-    ('4220f33b-182c-4edd-a5bc-bdee4e710c5a', 'QuantumLeap99', 'LeapQuantum$', '2024-08-15T14:00:00Z', '2024-08-15T14:00:00Z'),
-    ('bcfcc3da-74b0-4058-9f5a-547861440429', 'ExplorerX2024', 'Xplore@2024!', '2024-08-16T15:00:00Z', '2024-08-16T15:00:00Z'),
-    ('60778c3b-7b9d-46ca-afbb-66b5cda34775', 'Visionary42', 'Visi0nary@24', '2024-08-17T16:00:00Z', '2024-08-17T16:00:00Z'),
-    ('879c687c-c29d-4faa-a98c-1d38ce233945', 'DynamicDuo21', 'Dynam1cDuo@', '2024-08-18T17:00:00Z', '2024-08-18T17:00:00Z'),
-    ('55462ca9-2e52-4c48-a952-4c00f26e3beb', 'FutureBright', 'BrightFuture@2024', '2024-08-19T18:00:00Z', '2024-08-19T18:00:00Z'),
-    ('bb53b88f-5366-4936-b332-833a15c919dc', 'Innovator007', 'Innovate@007', '2024-08-20T19:00:00Z', '2024-08-20T19:00:00Z'),
-    ('b5b19e37-dbf0-46ac-8ca2-62271923002c', 'NatureLover90', 'NatureL0ver!', '2024-08-21T20:00:00Z', '2024-08-21T20:00:00Z'),
-    ('0558a352-f063-456f-8657-9fe4edbfc4a5', 'Skywalker82', 'Skywalker$82', '2024-08-22T21:00:00Z', '2024-08-22T21:00:00Z'),
-    ('ae7147b5-087b-4e48-80ae-77142612e552', 'MaverickX1', 'Mav3rickX@1', '2024-08-23T22:00:00Z', '2024-08-23T22:00:00Z'),
-    ('6dd239ab-fae2-4ae9-927c-feaa95cf8821', 'StarGazer2024', 'Stars@2024', '2024-08-24T23:00:00Z', '2024-08-24T23:00:00Z'),
-    ('d40f1e3e-25a5-4f16-a668-b16471ca9794', 'CodeMaster1', 'Code$Master1', '2024-08-25T12:00:00Z', '2024-08-25T12:00:00Z'),
-    ('4f439525-d9f0-4124-9923-440793ae5e7e', 'PixelArtist', 'Art1st@2024', '2024-08-26T13:00:00Z', '2024-08-26T13:00:00Z'),
-    ('f35215d6-7ecf-4b1c-a635-98f2a654094b', 'SonicBoom', 'S0nic!Boom', '2024-08-27T14:00:00Z', '2024-08-27T14:00:00Z'),
-    ('c31e9283-3cc1-43a5-9b5d-a8b4689c1797', 'DataDriven1', 'DataDriven#1', '2024-08-28T15:00:00Z', '2024-08-28T15:00:00Z'),
-    ('f60fca88-e786-4753-8097-5dc71ee88191', 'AlphaBeta23', 'AlphaBeta@23', '2024-08-29T16:00:00Z', '2024-08-29T16:00:00Z'),
-    ('b44be709-482c-479c-9efc-bd52ed67369c', 'PioneerTrail', 'Pioneer@2024', '2024-08-30T17:00:00Z', '2024-08-30T17:00:00Z');
+    --SecurePass1!
+    ('8d608d70-8ee1-454a-9362-5f0908f3bd5a', 'JordanLightning102', 'AQAAAAIAAYagAAAAEF9lMqr628VIFHT6J3Xbg2pCgyaEt3pJqRBEiNMWbDRfkq6yJ8UMI5mfXa5sPm+TnQ==', '2024-08-01T12:00:00Z', '2024-08-01T12:00:00Z'),
+    
+    --Techy$2024
+    ('02b53803-f29c-45d0-8263-2216992bb1de', 'TechGuru88', 'AQAAAAIAAYagAAAAEE1Y19Go2e+MxNEH6mRhrNDj+wfn/fT8gabw+B/W9vh3+o9brySW6Ggkfs6Ncgedww==', '2024-08-02T13:00:00Z', '2024-08-02T13:00:00Z'),
+
+    --G@m3r$2024!
+    ('bd784396-b978-4692-ae30-1cc5f4fb8db0', 'GamerGeekXtreme', 'AQAAAAIAAYagAAAAEFccjU4AV0odlCDtJBgOIIPriGwmFsXXIKfW5jc5HeZIMScwhxsD5r4pftRzsJkE7Q==', '2024-08-03T14:00:00Z', '2024-08-03T14:00:00Z'),
+
+    --Delicious#1
+    ('cb7a33a7-a645-48b9-9240-f6eed865deb4', 'CookingMaestro', 'AQAAAAIAAYagAAAAENODVstJ5LgwsVOxWMeQJuAcNwiD7NA0GQd2CDOPQ1iX7Cuuj9fw70CBzQRlYzx1lg==', '2024-08-04T15:00:00Z', '2024-08-04T15:00:00Z'),
+
+    --Wanderlust!
+    ('806a7ea5-90c0-4006-a501-eddd65efa7ed', 'TravelBug2024', 'AQAAAAIAAYagAAAAEOiAjspcjFR1wjB2aewTslrAtIrUh6ZvTjZEWdVU6cj/dkMFaQtqkgr5g6Ds4z5Yuw==', '2024-08-05T16:00:00Z', '2024-08-05T16:00:00Z'),
+
+    --Fit4Life#2024
+    ('02ff269a-2174-4529-bb38-e91632bbe74e', 'FitnessFanatic', 'AQAAAAIAAYagAAAAEEN9Aq9bG8O6guHD4cpgBqYjICiQlSk4vYq+3O2F5u1P4YO4+iy4bE+CJFJ0n5Jmqg==', '2024-08-06T17:00:00Z', '2024-08-06T17:00:00Z'),
+
+    --Mus!c4You
+    ('b12ff510-7e7a-468f-bbbe-e34524cf5076', 'MusicLover88', 'AQAAAAIAAYagAAAAEKVgkNhi4aAA2KPIWbl321J3+XnwdcPYxeSbNiHqkNKIl0zNVCal+KNFvsBqr4C3lQ==', '2024-08-07T18:00:00Z', '2024-08-07T18:00:00Z'),
+
+    --ReadMore@2024
+    ('30eb9215-f177-47a0-ba3e-684e4f264043', 'BookWorm101', 'AQAAAAIAAYagAAAAEE2nrdOFHwP4jYr+iPEJEm8by/6voL4HMeMCzO+v1r99pRgwkqRN9XHN6hxniybi4w==', '2024-08-08T19:00:00Z', '2024-08-08T19:00:00Z'),
+
+    --Creat3Art!
+    ('c2473940-547f-45ac-ab75-b89e07c444c6', 'ArtisticSoul22', 'AQAAAAIAAYagAAAAEMC36dO+u+tiUNDWHQbxdBrTwPFX5Q/EPedr51EKiaIFdKB6ja+q9b12hozUtCaASg==', '2024-08-09T20:00:00Z', '2024-08-09T20:00:00Z'),
+
+    --Innovate#2024
+    ('7bf52f3d-617f-4614-b48d-3c832715e924', 'TechieTribe', 'AQAAAAIAAYagAAAAEDzinjKmKeRgxCbQwTWzoC8n9bucKcVUJIlp2FP4XrULgD+3/AqRbDJZfa1uDOZLww==', '2024-08-10T21:00:00Z', '2024-08-10T21:00:00Z'),
+
+    --Create@2024
+    ('d9fda9b5-2dab-4475-992f-c67d55b70fde', 'DesignWizard', 'AQAAAAIAAYagAAAAEA2Q/je56uvkWn3xJO1dxnXzSkb8AvqufHHpPX0uapn/9mDptEYYH6c9M3mxb03nBg==', '2024-08-11T22:00:00Z', '2024-08-11T22:00:00Z'),
+
+    --Flash@2024!
+    ('bf298cc0-6723-449d-949d-d309936319ad', 'JordanFlash2024', 'AQAAAAIAAYagAAAAEACNX1iVhFsSwCWP4aCEDh2ZBBga97QqA1jiBiKtDmtqc/k6ITOzTJD5L+1+LlLcyw==', '2024-08-12T23:00:00Z', '2024-08-12T23:00:00Z'),
+
+    --FoxClever#1
+    ('ba39adef-c9df-4488-b8be-ec13d8453ec1', 'CleverFox90', 'AQAAAAIAAYagAAAAEK8T8AdwhQnMQZgpuKR2/WIDKFlH818S3Rp1L8A3XOFMqon5te6UJ++XyfOIaby3CQ==', '2024-08-13T12:00:00Z', '2024-08-13T12:00:00Z'),
+
+    --Mindset@2024
+    ('2006df37-120a-4e3a-b069-0b0b6f5153c8', 'CreativeMinds', 'AQAAAAIAAYagAAAAEHj1389uEVUJJivsgGJNI+kFMqn5jDTlmSi5akyqV6fWPl6cdmzhxCgszLv2Zq6rhg==', '2024-08-14T13:00:00Z', '2024-08-14T13:00:00Z'),
+
+    --LeapQuantum$
+    ('4220f33b-182c-4edd-a5bc-bdee4e710c5a', 'QuantumLeap99', 'AQAAAAIAAYagAAAAEHC/oi/KBPPgQhqH5GqehnTbto3NFULBrdGq98Yf0kLfQVF0axs8Nknm6cmRvK4oSQ==', '2024-08-15T14:00:00Z', '2024-08-15T14:00:00Z'),
+
+    --Xplore@2024!
+    ('bcfcc3da-74b0-4058-9f5a-547861440429', 'ExplorerX2024', 'AQAAAAIAAYagAAAAEBuWqr4iIHBETCy5AfBZqJvvCYMSCYf69vlHp1PyceGAqaK9+cDd8ADH6QoaH49eVw==', '2024-08-16T15:00:00Z', '2024-08-16T15:00:00Z'),
+
+    --Visi0nary@24
+    ('60778c3b-7b9d-46ca-afbb-66b5cda34775', 'Visionary42', 'AQAAAAIAAYagAAAAEBWAweGBTNe3expfEq/9cjeaVJmIKwGjAwBbUEakrneoX7MBbjz5J9K+CxvjkQqfpw==', '2024-08-17T16:00:00Z', '2024-08-17T16:00:00Z'),
+
+    --Dynam1cDuo@
+    ('879c687c-c29d-4faa-a98c-1d38ce233945', 'DynamicDuo21', 'AQAAAAIAAYagAAAAELmtoooFntsiNK/lSzmZFreRETeie4Bv99a3MRn4skRLTDHfrikPDhKeiSd83UyHBg==', '2024-08-18T17:00:00Z', '2024-08-18T17:00:00Z'),
+
+    --BrightFuture@2024
+    ('55462ca9-2e52-4c48-a952-4c00f26e3beb', 'FutureBright', 'AQAAAAIAAYagAAAAEMTQS6l3wvMvBIbwxIn0u1pvKsBgb2vw8E1P8oxfMW54pV1XNRoNcsAKT2T94WON4Q==', '2024-08-19T18:00:00Z', '2024-08-19T18:00:00Z'),
+
+    --Innovate@007
+    ('bb53b88f-5366-4936-b332-833a15c919dc', 'Innovator007', 'AQAAAAIAAYagAAAAEPINvbWDsUIel1luNuCBEP505bBPpWqvGADNuOfPlRunSVu5XRUggmF1Pf2XuUOB9g==', '2024-08-20T19:00:00Z', '2024-08-20T19:00:00Z'),
+
+    --NatureL0ver!
+    ('b5b19e37-dbf0-46ac-8ca2-62271923002c', 'NatureLover90', 'AQAAAAIAAYagAAAAEIyvuneHF8UaG4/wrgfIaqe5C6PMFK7XWgoX5LcrSdigNXprOAHy6CpGaIrOMJW+Hg==', '2024-08-21T20:00:00Z', '2024-08-21T20:00:00Z'),
+
+    --Skywalker$82
+    ('0558a352-f063-456f-8657-9fe4edbfc4a5', 'Skywalker82', 'AQAAAAIAAYagAAAAEHOkclqFyIMuAQlEEaq7D5sQFretAKoFYxXOpiNRdXTblj8woEMYns9SONcKelH8Ew==', '2024-08-22T21:00:00Z', '2024-08-22T21:00:00Z'),
+
+    --Mav3rickX@1
+    ('ae7147b5-087b-4e48-80ae-77142612e552', 'MaverickX1', 'AQAAAAIAAYagAAAAEPfXMo6pAPTXtyWNFF45qmBoNc08aC5rqpH7BJfWs4CGVos+hVk8xEAh0KP+DSzXRQ==', '2024-08-23T22:00:00Z', '2024-08-23T22:00:00Z'),
+
+    --Stars@2024
+    ('6dd239ab-fae2-4ae9-927c-feaa95cf8821', 'StarGazer2024', 'AQAAAAIAAYagAAAAEAkPCmAl6OQHWG+kFPbAL6UL9H11Ef+X1BLc2tXg2LeUtomhTOCtBph3gwJNpRUuYQ==', '2024-08-24T23:00:00Z', '2024-08-24T23:00:00Z'),
+
+    --Code$Master1
+    ('d40f1e3e-25a5-4f16-a668-b16471ca9794', 'CodeMaster1', 'AQAAAAIAAYagAAAAEL1fWOXJTSDDvY4AIFUB1AwY9doZeRTe1+D4G5Isd/wGy9q9equzF/qizkNm1UDekg==', '2024-08-25T12:00:00Z', '2024-08-25T12:00:00Z'),
+
+    --Art1st@2024
+    ('4f439525-d9f0-4124-9923-440793ae5e7e', 'PixelArtist', 'AQAAAAIAAYagAAAAEFwJQtZD1ieq3airIrewdl+QGJpXJ1XvbmimkhFDCR7T4DjO+CiiDOBn3+gg7QOjLg==', '2024-08-26T13:00:00Z', '2024-08-26T13:00:00Z'),
+
+    --S0nic!Boom
+    ('f35215d6-7ecf-4b1c-a635-98f2a654094b', 'SonicBoom', 'AQAAAAIAAYagAAAAELy6Iu1wDzahIVZo6IKPxPQMFyZnKGxR3GrFTLyawuigkCCGaqApEPB0YEIvDnE2Dg==', '2024-08-27T14:00:00Z', '2024-08-27T14:00:00Z'),
+
+    --DataDriven#1
+    ('c31e9283-3cc1-43a5-9b5d-a8b4689c1797', 'DataDriven1', 'AQAAAAIAAYagAAAAEMxR62EKK5DpD3CCU/dVtonU48xUdlCwWJv+qjTZ5yt1g+PHuw7O89UJC2ver2DvJg==', '2024-08-28T15:00:00Z', '2024-08-28T15:00:00Z'),
+
+    --AlphaBeta@23
+    ('f60fca88-e786-4753-8097-5dc71ee88191', 'AlphaBeta23', 'AQAAAAIAAYagAAAAEF3DsQeRVldtXxAvaXvoRnyKnV3vn3lNzRNGqIoNzx0Msx/JPxNbjosaU92nW0nV/g==', '2024-08-29T16:00:00Z', '2024-08-29T16:00:00Z'),
+
+    --Pioneer@2024
+    ('b44be709-482c-479c-9efc-bd52ed67369c', 'PioneerTrail', 'AQAAAAIAAYagAAAAEK7FCIr/GBnEScjY8E3psRD+2I1BJKKU2/ccBbTfQc9RyrFRCgMpSN6dN60Jo+kpeA==', '2024-08-30T17:00:00Z', '2024-08-30T17:00:00Z');
