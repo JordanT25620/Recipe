@@ -21,12 +21,10 @@ import {
   Typography,
   Grid,
   Box,
-  OutlinedInput,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import CloseIcon from "@mui/icons-material/Close";
 import "./App.css";
 
 // text prop inserts itself into the button
@@ -43,7 +41,7 @@ const ButtonUsage = ({ text }) => {
 // Floating action button
 const Floater = () => {
   return (
-    <div>
+    <div className="floater">
       <Fab color="primary" aria-label="add">
         <AddIcon />
       </Fab>
@@ -77,12 +75,6 @@ const Password = ({ text, onChange, name, value, error, helperText, id }) => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-
   return (
     <FormControl sx={{ width: "25ch" }} variant="standard" error={error}>
       <InputLabel htmlFor={id} variant="standard">
@@ -100,7 +92,6 @@ const Password = ({ text, onChange, name, value, error, helperText, id }) => {
             <IconButton
               aria-label="toggle password visibility"
               onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
             >
               {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
@@ -187,74 +178,78 @@ const NavBar = () => {
   );
 };
 
-const Recipe = () => {
+const Recipe = ({ width }) => {
   return (
-    <Box sx={{ p: 0.5 }}>
-      <center>
-        <Box
-          component="section"
+    <Box sx={{ padding: 0.5 }}>
+      <Box
+        component="section"
+        sx={{
+          width: { width },
+          backgroundColor: "lightgray",
+          borderRadius: 4,
+          display: "flex",
+          height: "250px",
+        }}
+      >
+        <Button
+          variant="text"
           sx={{
-            width: "80%",
-            backgroundColor: "lightgray",
-            borderRadius: 4,
+            width: "100%",
+            height: "100%",
             display: "flex",
-            height: "250px",
+            flexDirection: "column",
+            borderRadius: 4,
+            color: "black",
+            textAlign: "left",
+            textTransform: "none",
+            padding: 2,
+            boxSizing: "border-box",
+            overflow: "hidden", // Change to auto to allow scrolling if needed
+            alignItems: "flex-start", // Align items to start to avoid centering issues
+            justifyContent: "flex-start", // Align items to start to handle vertical alignment
+            ":hover": {
+              backgroundColor: "Silver",
+            },
           }}
         >
-          <Button
-            variant="text"
-            sx={{
-              width: "100%",
-              height: "100%", // Ensures the Button takes up the full height of the Box
-              display: "flex",
-              flexDirection: "column", // Allows content inside Button to be laid out in a column
-              borderRadius: 4,
-              color: "black",
-              ":hover": {
-                backgroundColor: "Silver", // Change this to your desired hover color
-              },
-            }}
-          >
-            <Grid container direction="column" spacing={2}>
+          <Grid container direction="column" spacing={2} sx={{ width: "100%" }}>
+            <Grid item>
+              <Typography
+                variant="h5"
+                sx={{ textAlign: "left", marginBottom: 1 }}
+              >
+                Spaghetti Bolognese
+              </Typography>
+            </Grid>
+            <Grid container item spacing={2} wrap="wrap">
               <Grid item>
-                <Typography variant="h5">Spaghetti Bolognese</Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ textAlign: "left", marginBottom: 1 }}
+                >
+                  Spaghetti Noodles, Bingo bango bongo, Dingo dango songo, etc,
+                  etc, bingo bango bingo bongo bango, justify content yessir
+                </Typography>
               </Grid>
-              <Grid container item spacing={2} wrap="wrap">
-                <Grid item xs={4}>
-                  <Typography variant="h7">Spaghetti Noodles</Typography>
-                </Grid>
-                <Grid item xs={4}>
-                  <Typography variant="h7">Hot sauce</Typography>
-                </Grid>
-                <Grid item xs={4}>
-                  <Typography variant="h7">Meatballs</Typography>
-                </Grid>
-                <Grid item xs={4}>
-                  <Typography variant="h7">Garlic Bread</Typography>
-                </Grid>
-                <Grid item xs={4}>
-                  <Typography variant="h7">Spices and herbs</Typography>
-                </Grid>
-                <Grid item xs={4}>
-                  <Typography variant="h7">Vinegar</Typography>
-                </Grid>
+              <Grid item>
+                <Typography
+                  variant="body1"
+                  sx={{ textAlign: "left", marginBottom: 1 }}
+                >
+                  Spaghetti Noodles, Bingo bango bongo, Dingo dango songo, etc,
+                  etc, bingo bango bingo bongo bango, justify content yessir
+                </Typography>
               </Grid>
             </Grid>
-            {/* <Typography>**Stuff that goes inside the box**</Typography> */}
-          </Button>
-        </Box>
-      </center>
+          </Grid>
+          {/* <Typography>**Stuff that goes inside the box**</Typography> */}
+        </Button>
+      </Box>
     </Box>
   );
 };
 
+export default Recipe;
+
 // make sure the other files can read these functions (cannot be defaulted)
-export {
-  Floater,
-  ButtonUsage,
-  Username,
-  Password,
-  HoverTip,
-  NavBar,
-  Recipe,
-};
+export { Floater, ButtonUsage, Username, Password, HoverTip, NavBar, Recipe };

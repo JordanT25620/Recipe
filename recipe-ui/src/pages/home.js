@@ -1,44 +1,65 @@
 import React from "react";
 
-import {
-  ButtonUsage,
-  Username,
-  Password,
-  NavBar,
-  Floater,
-  Recipe,
-} from "../components.js";
+import { NavBar, Recipe, Floater } from "../components.js";
 
-import { Grid, Button, Typography, Container } from "@mui/material";
+import { Grid, Typography, Container } from "@mui/material";
+import "../App.css";
 
 const Home = () => {
   return (
     <>
-      <Grid
-        container
-        direction="column"
-        justifyItems={"center"}
-      >
-        <Grid item>
-          <NavBar />
-        </Grid>
-        <Grid item padding={2}>
-          <center>
-            <Typography variant="h5">Recipe Book</Typography>
-          </center>
-        </Grid>
-        <Grid item padding={2}>
-            <Recipe />
-            <Recipe />
-          {/* Enter the recipes here */}
-        </Grid>
+      <NavBar />
+      <center>
+        <Typography variant="h5" padding={2}>
+          Recipe Book
+        </Typography>
+      </center>
+
+      <Container maxWidth='100%'>
         <Grid
-          item
-          style={{ position: "absolute", bottom: "15px", right: "15px" }}
+          container
+          spacing={2}
+          direction="row"
+          wrap="wrap"
+          justifyContent="flex-start"
         >
-          <Floater />
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Recipe />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Recipe />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Recipe />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Recipe />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Recipe />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Recipe />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Recipe />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Recipe />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Recipe />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Recipe />
+          </Grid>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
+            <Recipe />
+          </Grid>
         </Grid>
-      </Grid>
+        <Floater />
+      </Container>
+
     </>
   );
 };
