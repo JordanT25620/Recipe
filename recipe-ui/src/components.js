@@ -26,6 +26,8 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import "./App.css";
+import logo from "./logo512.png";
+import { useNavigate } from "react-router-dom";
 
 // text prop inserts itself into the button
 const ButtonUsage = ({ text }) => {
@@ -40,9 +42,16 @@ const ButtonUsage = ({ text }) => {
 
 // Floating action button
 const Floater = () => {
+  const navigate = useNavigate();
+
+  const handleRedirect = (event) => {
+    event.preventDefault();
+    navigate("/create");
+  };
+
   return (
     <div className="floater">
-      <Fab color="primary" aria-label="add">
+      <Fab color="primary" onClick={handleRedirect}>
         <AddIcon />
       </Fab>
     </div>
@@ -153,9 +162,7 @@ const NavBar = () => {
                 },
               }}
             >
-              <Typography variant="h7" style={{ color: "black" }}>
-                Logo
-              </Typography>
+              <img className="home_icon" src={logo} alt="icon"></img>
             </Button>
             <Button
               sx={{
@@ -178,7 +185,7 @@ const NavBar = () => {
   );
 };
 
-const Recipe = ({ width }) => {
+const Recipe = ({ width, title, instructions, ingredients }) => {
   return (
     <Box sx={{ padding: 0.5 }}>
       <Box
@@ -214,35 +221,56 @@ const Recipe = ({ width }) => {
         >
           <Grid container direction="column" spacing={2} sx={{ width: "100%" }}>
             <Grid item>
+              {/* TITLE */}
               <Typography
                 variant="h5"
-                sx={{ textAlign: "left", marginBottom: 1 }}
+                sx={{
+                  textAlign: "left",
+                  marginBottom: 1,
+                  overflow: "hidden",
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 1, // Adjust this to control how many lines to show
+                }}
               >
-                Spaghetti Bolognese
+                {title}
               </Typography>
             </Grid>
             <Grid container item spacing={2} wrap="wrap">
               <Grid item>
+                {/* INGREDIENTS */}
                 <Typography
                   variant="body1"
-                  sx={{ textAlign: "left", marginBottom: 1 }}
+                  sx={{
+                    textAlign: "left",
+                    marginBottom: 1,
+                    overflow: "hidden",
+                    display: "-webkit-box",
+                    WebkitBoxOrient: "vertical",
+                    WebkitLineClamp: 3, // Adjust this to control how many lines to show
+                  }}
                 >
-                  Spaghetti Noodles, Bingo bango bongo, Dingo dango songo, etc,
-                  etc, bingo bango bingo bongo bango, justify content yessir
+                  {ingredients}
                 </Typography>
               </Grid>
+              {/* INSTRUCTIONS */}
               <Grid item>
                 <Typography
                   variant="body1"
-                  sx={{ textAlign: "left", marginBottom: 1 }}
+                  sx={{
+                    textAlign: "left",
+                    marginBottom: 1,
+                    overflow: "hidden",
+                    display: "-webkit-box",
+                    WebkitBoxOrient: "vertical",
+                    WebkitLineClamp: 3, // Adjust this to control how many lines to show
+                  }}
                 >
-                  Spaghetti Noodles, Bingo bango bongo, Dingo dango songo, etc,
-                  etc, bingo bango bingo bongo bango, justify content yessir
+                  {instructions}
                 </Typography>
               </Grid>
             </Grid>
           </Grid>
-          {/* <Typography>**Stuff that goes inside the box**</Typography> */}
         </Button>
       </Box>
     </Box>
