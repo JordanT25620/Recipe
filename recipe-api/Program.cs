@@ -19,6 +19,15 @@ builder.Services.AddScoped<IRecipeService, RecipeService>(); //AddSingleton, Add
 builder.Services.AddScoped<IIngredientService, IngredientService>(); //AddSingleton, AddScoped, AddTransient
 builder.Services.AddScoped<IAuthService, AuthService>(); //AddSingleton, AddScoped, AddTransient
 
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowLocalhost5173",
+            builder => builder
+                .WithOrigins("http://localhost:5173") //Change to production React web URL later.
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+    });
+
 string key = builder.Configuration["Jwt:Key"]!;
     if (string.IsNullOrEmpty(key))
     {
@@ -56,6 +65,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseExceptionHandler("/error");
+app.UseCors("AllowLocalhost5173");
+app.UseRouting();
 //app.UseHttpsRedirection(); //Uncomment this line later
 app.UseAuthentication();
 app.UseAuthorization();

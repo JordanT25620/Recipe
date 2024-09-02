@@ -6,26 +6,32 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Login from "./pages/Login.js";
-import CreateAccount from "./pages/CreateAccount.tsx";
-import Home from "./pages/Home.tsx";
-import CreateRecipe from "./pages/CreateRecipe.js";
-import PageNotFound from "./pages/PageNotFound.js";
+import CreateAccount from "./pages/CreateAccountPage.tsx";
+import { ThemeProvider } from '@emotion/react';
+import LoginPage from './pages/LoginPage.tsx';
+import theme from './config/Theme.ts';
+import NotFoundPage from './pages/NotFoundPage.tsx';
+import AuthProvider from './context/auth/AuthProvider.tsx';
+import HomePage from './pages/HomePage.tsx';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/create" element={<CreateRecipe />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<CreateAccount />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={< Navigate to="/home" />} />
+              <Route path="/register" element={< CreateAccount />} />
+              <Route path="/login" element={< LoginPage />} />
+              <Route path="/home" element={< HomePage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Router>
+        </AuthProvider>
+      </ThemeProvider>
     </>
   )
 }
