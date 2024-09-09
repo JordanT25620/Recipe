@@ -1,62 +1,46 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { Container, Typography, Box } from '@mui/material';
 import FormInput from '../components/shared/FormInput/FormInput';
 import SubmitButton from '../components/shared/SubmitButton/SubmitButton';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import AuthLink from '../components/shared/AuthLink/AuthLink';
 import createAccountValidationSchema from '../form-validation/CreateAccountValidationSchema';
 import CreateAccountFormModel from '../models/form-models/CreateAccountFormModel';
 import { registerUser } from '../services/UserService';
 import { useNavigate } from 'react-router-dom';
 import ApiError from '../utils/error-handling/ApiError';
-import { Bounce, toast, ToastContainer } from 'react-toastify';
+import {toast} from 'react-toastify';
+import CustomToastContainer from '../components/shared/CustomToastContainer/CustomToastContainer';
+import { showToast } from '../utils/toasts/showToast';
+import { useFormSubmit } from '../hooks/useFormSubmit';
 
 const CreateAccountPage: React.FC = () => {
-  const { register, handleSubmit, formState: { errors }, /*setError*/ } = useForm<CreateAccountFormModel>({
-    resolver: yupResolver(createAccountValidationSchema),
-  });
 
+  //Hooks
+  const { register, handleSubmit, errors, /*setError*/ } = useFormSubmit<CreateAccountFormModel>(createAccountValidationSchema);
   const navigate = useNavigate();
 
+  //Form submission logic
   const onSubmit: SubmitHandler<CreateAccountFormModel> = async (formData: CreateAccountFormModel) => {
     const result : null | ApiError = await registerUser(formData);
+    toast.dismiss();
     if (result instanceof ApiError) {
       const apiError : ApiError = result;
-      toast.info(apiError.message, {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-        });
+      showToast(apiError.message, "info");
       //setError('username', { type: 'manual', message: 'Invalid username or password' });
     } else {
-      toast.success(`Account ${formData.username} was successfully created!`, {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      showToast(`Account ${formData.username} was successfully created!`, "success");
       navigate('/login');
     }
   };
 
+  //Component
   return (
     <>
       <Container
-        maxWidth={false}  //Allows the Container to expand to full width
+        maxWidth={false}
         sx={{
-          height: '100vh',  //Force full height to match the viewport
-          width: '100vw',   //Force full width to match the viewport
+          height: '100vh',
+          width: '100vw',
           display: 'flex',
           backgroundColor: '#f5f5f5',
           padding: 4
@@ -109,19 +93,7 @@ const CreateAccountPage: React.FC = () => {
           />
         </Box>
       </Container>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        limit={1}
-      />
+      <CustomToastContainer/>
     </>
   ); //end return
 }; //end CreateAccountPage

@@ -1,41 +1,34 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitHandler } from 'react-hook-form';
 import { Container, Typography, Box} from '@mui/material';
 import FormInput from '../components/shared/FormInput/FormInput';
 import SubmitButton from '../components/shared/SubmitButton/SubmitButton';
 import AuthLink from '../components/shared/AuthLink/AuthLink';
-import loginValidationSchema from '../form-validation/LoginValidationSchema';
 import LoginFormModel from '../models/form-models/LoginFormModel';
 import { authenticateUser } from '../services/AuthService';
 import useAuthContext from '../hooks/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 import AuthResponse from '../models/response-models/AuthResponse';
 import ApiError from '../utils/error-handling/ApiError';
-import { Bounce, toast, ToastContainer } from 'react-toastify';
+import CustomToastContainer from '../components/shared/CustomToastContainer/CustomToastContainer';
+import { toast } from 'react-toastify';
+import { showToast } from '../utils/toasts/showToast';
+import { useFormSubmit } from '../hooks/useFormSubmit';
+import loginValidationSchema from '../form-validation/LoginValidationSchema';
 
 const LoginPage: React.FC = () => {
-  const { register, handleSubmit, formState: { errors }, /*setError*/ } = useForm<LoginFormModel>({
-    resolver: yupResolver(loginValidationSchema),
-  });
 
+  //Hooks
+  const { register, handleSubmit, errors, /*setError*/ } = useFormSubmit<LoginFormModel>(loginValidationSchema);
   const { login } = useAuthContext();
   const navigate = useNavigate();
 
+  //Form submission logic
   const onSubmit: SubmitHandler<LoginFormModel> = async (formData: LoginFormModel) => {
     const result : AuthResponse | ApiError = await authenticateUser(formData);
+    toast.dismiss();
     if (result instanceof ApiError) {
       const apiError : ApiError = result;
-      toast.info(apiError.message, {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-        });
+      showToast(apiError.message, "info");
       //setError('username', { type: 'manual', message: 'Invalid username or password' });
     } else {
       const authResponse : AuthResponse = result;
@@ -44,6 +37,7 @@ const LoginPage: React.FC = () => {
     }
   };
 
+  //Component
   return (
     <>
       <Container
@@ -96,20 +90,7 @@ const LoginPage: React.FC = () => {
           />
         </Box>
       </Container>
-
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        limit={1}
-      />
+      <CustomToastContainer/>
     </>
   ); //end return;
 }; //end LoginPage

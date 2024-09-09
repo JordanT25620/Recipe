@@ -1,9 +1,11 @@
-import { ApiConfig } from "./ApiConfig/ApiConfigType";
+import { ApiConfig } from "./ApiConfig/ApiConfig";
 import { FieldRequirementsConfig } from "./FieldRequirementsConfig/FieldRequirementsConfig";
+import { ToastConfig } from "./ToastConfig/ToastConfig";
 
 export interface Config {
   api: ApiConfig;
   fieldRequirements: FieldRequirementsConfig;
+  toastSettings: ToastConfig;
 }
 
 const config: Config = {
@@ -21,6 +23,9 @@ const config: Config = {
       minLength: 7,
       maxLength: 40
     }
+  },
+  toastSettings: {
+    lifespanInMs: 5000
   }
 };
 
