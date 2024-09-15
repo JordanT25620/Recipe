@@ -14,28 +14,38 @@ import { toast } from 'react-toastify';
 import { showToast } from '../utils/toasts/showToast';
 import { useFormSubmit } from '../hooks/useFormSubmit';
 import loginValidationSchema from '../form-validation/LoginValidationSchema';
+import useApiCall from '../hooks/useApiCall';
+import { useEffect } from 'react';
+import { CircularProgress } from '@mui/material';
 
 const LoginPage: React.FC = () => {
 
   //Hooks
-  const { register, handleSubmit, errors, /*setError*/ } = useFormSubmit<LoginFormModel>(loginValidationSchema);
+  const { register, handleSubmit, errors } = useFormSubmit<LoginFormModel>(loginValidationSchema);
   const { login } = useAuthContext();
   const navigate = useNavigate();
+  //useApiCall hook takes 2 type parameters - 1) the input data; 2) the response data
+  const { isLoading, result, execute: authenticateViaApi } = useApiCall<LoginFormModel, AuthResponse>(authenticateUser);
 
   //Form submission logic
   const onSubmit: SubmitHandler<LoginFormModel> = async (formData: LoginFormModel) => {
-    const result : AuthResponse | ApiError = await authenticateUser(formData);
     toast.dismiss();
-    if (result instanceof ApiError) {
-      const apiError : ApiError = result;
-      showToast(apiError.message, "info");
-      //setError('username', { type: 'manual', message: 'Invalid username or password' });
-    } else {
-      const authResponse : AuthResponse = result;
-      login(authResponse.user, authResponse.token)
-      navigate('/home');
-    }
+    authenticateViaApi(formData);
   };
+
+  //Effect to handle result after API call finishes
+  useEffect(() => {
+    if (!isLoading && result) {
+      if (result instanceof ApiError) {
+        const apiError: ApiError = result;
+        showToast(apiError.message, 'info');
+      } else if (result instanceof AuthResponse) {
+        const authResponse: AuthResponse = result;
+        login(authResponse.user, authResponse.token);
+        navigate('/home'); 
+      }
+    }
+  }, [result, isLoading, login, navigate]);
 
   //Component
   return (
@@ -79,9 +89,13 @@ const LoginPage: React.FC = () => {
               register={register}
               error={errors.password}
             />
-            <SubmitButton style={{ marginTop: 16 }}>
-              Sign In
-            </SubmitButton>
+            {isLoading ? 
+              <CircularProgress/>
+              : 
+              <SubmitButton style={{ marginTop: 16 }}>
+                Sign In
+              </SubmitButton>
+            }
           </form>
           <AuthLink
             questionText="Don't have an account?"

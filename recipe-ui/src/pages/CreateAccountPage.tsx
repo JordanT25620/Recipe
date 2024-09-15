@@ -1,4 +1,4 @@
-import { Container, Typography, Box } from '@mui/material';
+import { Container, Typography, Box, CircularProgress } from '@mui/material';
 import FormInput from '../components/shared/FormInput/FormInput';
 import SubmitButton from '../components/shared/SubmitButton/SubmitButton';
 import { SubmitHandler } from 'react-hook-form';
@@ -12,26 +12,34 @@ import {toast} from 'react-toastify';
 import CustomToastContainer from '../components/shared/CustomToastContainer/CustomToastContainer';
 import { showToast } from '../utils/toasts/showToast';
 import { useFormSubmit } from '../hooks/useFormSubmit';
+import useApiCall from '../hooks/useApiCall';
+import { useEffect } from 'react';
 
 const CreateAccountPage: React.FC = () => {
 
   //Hooks
-  const { register, handleSubmit, errors, /*setError*/ } = useFormSubmit<CreateAccountFormModel>(createAccountValidationSchema);
+  const { register, handleSubmit, errors } = useFormSubmit<CreateAccountFormModel>(createAccountValidationSchema);
   const navigate = useNavigate();
+  const { isLoading, result, execute: registerViaApi } = useApiCall<CreateAccountFormModel, null>(registerUser);
 
   //Form submission logic
   const onSubmit: SubmitHandler<CreateAccountFormModel> = async (formData: CreateAccountFormModel) => {
-    const result : null | ApiError = await registerUser(formData);
     toast.dismiss();
-    if (result instanceof ApiError) {
-      const apiError : ApiError = result;
-      showToast(apiError.message, "info");
-      //setError('username', { type: 'manual', message: 'Invalid username or password' });
-    } else {
-      showToast(`Account ${formData.username} was successfully created!`, "success");
-      navigate('/login');
-    }
+    registerViaApi(formData);
   };
+
+  //Effect to handle result after API call finishes
+  useEffect(() => {
+    if (!isLoading) {
+      if (result instanceof ApiError) {
+        const apiError: ApiError = result;
+        showToast(apiError.message, 'info');
+      } else {
+        showToast(`Account successfully created!`, "success");
+        navigate('/login'); 
+      }
+    }
+  }, [result, isLoading, navigate]);
 
   //Component
   return (
@@ -82,9 +90,13 @@ const CreateAccountPage: React.FC = () => {
               register={register}
               error={errors.confirmPassword}
             />
-            <SubmitButton style={{ marginTop: 16 }}> 
-              Register 
-            </SubmitButton>
+            {isLoading ? 
+              <CircularProgress/>
+              : 
+              <SubmitButton style={{ marginTop: 16 }}>
+                Register
+              </SubmitButton>
+            }
           </form>
           <AuthLink 
             questionText="Already have an account?" 

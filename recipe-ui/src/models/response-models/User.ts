@@ -1,4 +1,4 @@
-export default interface User {
+export default interface User extends Response {
     id: string;
     username: string;
 }

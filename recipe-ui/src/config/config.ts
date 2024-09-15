@@ -11,7 +11,8 @@ export interface Config {
 const config: Config = {
   api: {
     apiUrl: 'http://localhost:5072/api',
-    timeout: 5000,
+    timeout: 10000, //In ms
+    delay: 500, //In ms
     getEndpointURL: (endpoint) => `${config.api.apiUrl}/${endpoint}`
   },
   fieldRequirements: {
