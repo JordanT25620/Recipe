@@ -19,7 +19,8 @@ public class ApiController : ControllerBase {
 
         return Problem(
             statusCode: statusCode,
-            title: firstError.Description
+            title: firstError.Description,
+            type: firstError.Code
         );
     }
 }
